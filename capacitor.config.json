@@ -1,0 +1,8 @@
+{
+  "appId": "com.example.app",
+  "appName": "android_packagename",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "public",
+  "cordova": {}
+}

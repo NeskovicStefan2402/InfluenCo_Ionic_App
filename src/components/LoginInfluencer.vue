@@ -27,6 +27,8 @@ export default {
     methods:{
         login(){
             if(this.$store.state.info){
+                this.$store.state.login.influencer.email=this.email
+                this.$store.state.login.influencer.password=this.password
                 localStorage.setItem('info',true)
                 this.$router.push('/info')
             }else{
