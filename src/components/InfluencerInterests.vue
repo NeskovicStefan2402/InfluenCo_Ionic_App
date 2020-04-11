@@ -16,10 +16,10 @@
     <ion-content>
         <ion-item v-for="i,index in $store.state.types" @click="selectItem(i)">
             <ion-col>
-                {{i}}
+                {{i.name}}
             </ion-col>
             <ion-col size='2'>
-                <i id='polje' v-if="$store.state.influencer.interest==i" class="fa fa-check"></i>
+                <i id='polje' v-if="$store.state.interest.name==i.name" class="fa fa-check"></i>
             </ion-col>
         </ion-item>
     </ion-content>
@@ -31,7 +31,7 @@ import eventBus from '../main'
 export default {
     methods:{
         selectItem(i){
-            this.$store.state.influencer.interest=i
+            this.$store.state.interest=i
             this.$router.push('/welcome/signUp')
         }
     }

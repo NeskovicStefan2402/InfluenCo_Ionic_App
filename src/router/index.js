@@ -4,6 +4,7 @@ import Login from '../views/Login.vue'
 import SignUp from '../views/SignUp.vue'
 import Info from '../views/InfoSlider.vue'
 import Start from '../views/Start.vue'
+import InfluencerProfile from '../views/InfluencerProfile.vue'
 import Interests from '../components/InfluencerInterests'
 import WelcomeHeader from '../components/WelcomeHeader'
 import Welcome from '../views/Welcome.vue'
@@ -30,6 +31,11 @@ Vue.use(IonicVueRouter);
     path: '/info',
     name: 'Info',
     component: Info
+  },
+  {
+    path: '/influencerProfile',
+    name: 'InfluencerProfile',
+    component: InfluencerProfile
   },
   {
     path: '/welcome',

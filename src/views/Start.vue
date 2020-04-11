@@ -2,10 +2,11 @@
     <ion-page>
         <HeaderIn/>
         <ion-content  id='nesto'>
-            <Menu/>
-            <Gallery/>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro culpa dignissimos sed nobis labore ex maxime esse, eaque veniam deleniti amet impedit quam temporibus. Magnam in molestias necessitatibus iste, id corporis, saepe nostrum libero perspiciatis, fugit aut quibusdam beatae est aliquid placeat laboriosam iure atque! Sequi saepe ut amet accusantium.
-            
+                <Menu v-if='$store.state.open_menu==true'/>
+            <div v-else>
+                <Gallery />
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro culpa dignissimos sed nobis labore ex maxime esse, eaque veniam deleniti amet impedit quam temporibus. Magnam in molestias necessitatibus iste, id corporis, saepe nostrum libero perspiciatis, fugit aut quibusdam beatae est aliquid placeat laboriosam iure atque! Sequi saepe ut amet accusantium.
+            </div>
         </ion-content>
     </ion-page>
 </template>
@@ -13,7 +14,7 @@
 import Menu from '../components/Influencer/LeftMenu'
 import Gallery from '../components/Influencer/Gallery/HomeGallery'
 import HeaderIn from '../components/HeaderIn'
-// import eventBus from '../main'
+import eventBus from '../main'
 export default {
     components:{
         Menu,
@@ -24,6 +25,11 @@ export default {
         return{
             open:false
         }
+    },
+    mounted() {
+        eventBus.$on("nav", ele => {
+            this.open = ele;
+        });
     },
     methods:{
        

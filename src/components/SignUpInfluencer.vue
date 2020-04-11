@@ -1,38 +1,38 @@
 <template>
     <ion-content>
         <ion-item>
-            <ion-input placeholder="First name" :value="$store.state.influencer.first" @ionInput="$store.state.influencer.first = $event.target.value"></ion-input>
+            <ion-input placeholder="First name" :value="first" @ionInput="first = $event.target.value"></ion-input>
         </ion-item>
         <ion-item>
-            <ion-input placeholder="Last name" :value="$store.state.influencer.last" @ionInput="$store.state.influencer.last = $event.target.value"></ion-input>
+            <ion-input placeholder="Last name" :value="last" @ionInput="last = $event.target.value"></ion-input>
         </ion-item>
         <ion-item>
-            <ion-input placeholder="Email" type='email' :value="$store.state.influencer.email" @ionInput="$store.state.influencer.email = $event.target.value"></ion-input>
+            <ion-input placeholder="Email" type='email' :value="email" @ionInput="email = $event.target.value"></ion-input>
         </ion-item>
         <ion-item>
-            <ion-input placeholder="Age" type='number' :value="$store.state.influencer.age" @ionInput="$store.state.influencer.age = $event.target.value"></ion-input>
+            <ion-input placeholder="Age" type='number' :value="age" @ionInput="age = $event.target.value"></ion-input>
         </ion-item>
-        <ion-item @click="$router.push('/interests')">
-            <ion-label >Interests: {{$store.state.influencer.interest}}</ion-label>
-        </ion-item>
-        <ion-item>
-            <ion-input placeholder="Youtube name" :value="$store.state.influencer.youtube" @ionInput="$store.state.influencer.youtube = $event.target.value"></ion-input>
+        <ion-item @click="openInterests()">
+            <ion-label >Interests: {{$store.state.interest.name}}</ion-label>
         </ion-item>
         <ion-item>
-            <ion-input placeholder="Instagram name" :value="$store.state.influencer.instagram" @ionInput="$store.state.influencer.instagram = $event.target.value"></ion-input>
+            <ion-input placeholder="Youtube name" :value="youtube" @ionInput="youtube = $event.target.value"></ion-input>
         </ion-item>
         <ion-item>
-            <ion-input placeholder="Facebook name" :value="$store.state.influencer.facebook" @ionInput="$store.state.influencer.facebook = $event.target.value"></ion-input>
+            <ion-input placeholder="Instagram name" :value="instagram" @ionInput="instagram = $event.target.value"></ion-input>
         </ion-item>
         <ion-item>
-            <ion-input placeholder="Twitter name" :value="$store.state.influencer.twitter" @ionInput="$store.state.influencer.twitter = $event.target.value"></ion-input>
+            <ion-input placeholder="Facebook name" :value="facebook" @ionInput="facebook = $event.target.value"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-input placeholder="Twitter name" :value="twitter" @ionInput="twitter = $event.target.value"></ion-input>
         </ion-item>
         
         <ion-item>
-            <ion-input type='password' placeholder="Password" :value="$store.state.influencer.password" @ionInput="$store.state.influencer.password = $event.target.value"></ion-input>
+            <ion-input type='password' placeholder="Password" :value="password" @ionInput="password = $event.target.value"></ion-input>
         </ion-item>
         <ion-item>
-            <ion-input type='password' placeholder="Confirm password" :value="$store.state.influencer.confirm_password" @ionInput="$store.state.influencer.confirm_password = $event.target.value"></ion-input>
+            <ion-input type='password' placeholder="Confirm password" :value="confirm_password" @ionInput="confirm_password = $event.target.value"></ion-input>
         </ion-item>
         <ion-row>
             <ion-col>
@@ -51,23 +51,70 @@ export default {
     components:{
         Interests
     },
+    data(){
+        return{
+                first:'',
+                last:'',
+                email:'',
+                age:18,
+                interest:'',
+                youtube:'',
+                instagram:'',
+                twitter:'',
+                facebook:'',
+                password:'',
+                confirm_password:''
+        }
+    },
     methods:{
+        openInterests(){
+            if(this.$store.state.types.length==0){
+                this.$store.dispatch('getInterests')
+                .then(success=>{
+                    this.$router.push('/interests')
+                })
+                .catch(error=>{
+                    alert('Problem with loading data!')
+                })
+            }else{
+                this.$router.push('/interests')
+            }
+        },
         cancel(){
-            this.$store.state.influencer.first=''
-            this.$store.state.influencer.last=''
-            this.$store.state.influencer.email=''
-            this.$store.state.influencer.age=18
-            this.$store.state.influencer.interest=''
-            this.$store.state.influencer.youtube=''
-            this.$store.state.influencer.instagram=''
-            this.$store.state.influencer.twitter=''
-            this.$store.state.influencer.facebook=''
-            this.$store.state.influencer.password=''
-            this.$store.state.influencer.confirm_password=''
+            this.first=''
+            this.last=''
+            this.email=''
+            this.age=18
+            this.interest=''
+            this.youtube=''
+            this.instagram=''
+            this.twitter=''
+            this.facebook=''
+            this.password=''
+            this.confirm_password=''
         },
         send(){
-            alert('Podaci su:{'+this.$store.state.influencer.first+','+this.$store.state.influencer.last+','+this.$store.state.influencer.email+','+this.$store.state.influencer.age+','+this.$store.state.influencer.youtube+','+this.$store.state.influencer.facebook+','+this.$store.state.influencer.instagram+','+this.$store.state.influencer.twitter+','+this.$store.state.influencer.password+','+this.$store.state.influencer.confirm_password+'}')
-            this.cancel()
+            var data={
+                first_name:this.first,
+                last_name:this.last,
+                email:this.email,
+                age:this.age,
+                interest:this.$store.state.interest.id,
+                youtube:this.youtube,
+                instagram:this.instagram,
+                twitter:this.twitter,
+                facebook:this.facebook,
+                password:this.password
+            }
+            this.$store.dispatch('signUpInfluencer',data)
+                .then(success=>{
+                    alert('Your account is successfully created!')
+                    this.cancel()
+                })
+                .catch(error=>{
+                    alert('Error')
+                })
+            
         }
     
     }

@@ -1,29 +1,17 @@
 <template>
-  <div v-if="open==true" id="menu" class="sidenav">
-    <ion-content color="dark">
-      <!-- <ion-label class="closebtn" @click="closeNav()">&times;</ion-label> -->
-      <Profile />
-      <MenuItem name='Home'/>
-      <MenuItem name='Profile'/>
-      <MenuItem name='Messages'/>
-      <MenuItem name='Companies'/>
-      
-      <!-- <ion-item color="dark">
-        <h5>Home</h5>
-      </ion-item> -->
-      <!-- <ion-item color="dark">
-        <h5>Profile</h5>
-      </ion-item> -->
-      <!-- <ion-item color="dark">
-        <h5>Messages</h5>
-      </ion-item> -->
-      <!-- <ion-item color="dark">
-        <h5>Companies</h5>
-      </ion-item> -->
-      <br />
-      <Icons />
-    </ion-content>
-  </div>
+      <div  v-if="$store.state.open_menu==true" id="menu" class="sidenav animated fadeInLeft">
+          <ion-content color="dark" >
+            <!-- <ion-label class="closebtn" @click="closeNav()">&times;</ion-label> -->
+            <Profile />
+            <MenuItem :data='home'/>
+            <MenuItem :data='profile'/>
+            <MenuItem :data='messages'/>
+            <MenuItem :data='companies'/>
+            <MenuItem :data='logout'/>
+            <br />
+            <Icons />
+          </ion-content>
+        </div>
 </template>
 <script>
 import eventBus from "../../main";
@@ -33,7 +21,27 @@ import MenuItem from './MenuItem'
 export default {
   data() {
     return {
-      open: false
+      open: false,
+      home:{
+        name:'Home',
+        path:'/home'
+      },
+      profile:{
+        name:'Profile',
+        path:'/influencerProfile'
+      },
+      messages:{
+        name:'Message',
+        path:'/home'
+      },
+      companies:{
+        name:'Companies',
+        path:'/home'
+      },
+      logout:{
+        name:'Logout',
+        path:'/'
+      }
     };
   },
   components: {
@@ -52,13 +60,13 @@ export default {
 .sidenav {
   height: 100%;
   width: 300px;
+  box-shadow:0 0 0 10000px rgba(0,0,0,.50);
   position: fixed;
   z-index: 1;
   top: 0;
   left: 0;
-  background-color: #111;
+  background-color: rgba(0,0,0,.50);
   overflow-x: hidden;
-  transition: 0.5s;
   table-layout: fixed;
   border-collapse: collapse;
   position: relative;

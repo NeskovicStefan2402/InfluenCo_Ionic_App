@@ -1,10 +1,10 @@
 <template>
     <ion-content>
         <ion-item>
-            <ion-input placeholder="Email" :value="email"></ion-input>
+            <ion-input placeholder="Email" :value="email" @ionInput="email = $event.target.value"></ion-input>
         </ion-item>
         <ion-item>
-            <ion-input type='password' placeholder="Password" :value="password"></ion-input>
+            <ion-input type='password' placeholder="Password" :value="password" @ionInput="password = $event.target.value"></ion-input>
         </ion-item>
         <ion-row>
             <ion-col>
@@ -26,14 +26,23 @@ export default {
     },
     methods:{
         login(){
-            if(this.$store.state.info){
-                this.$store.state.login.influencer.email=this.email
-                this.$store.state.login.influencer.password=this.password
-                localStorage.setItem('info',true)
-                this.$router.push('/info')
-            }else{
-                this.$router.push('/home')
-            }
+            // if(this.$store.state.info){
+                
+            // }else{
+            //     this.$router.push('/home')
+            // }
+            
+            var data={
+                    email:this.email,
+                    password:this.password
+                }
+                this.$store.dispatch('loginInfluencer',data)
+                .then(success=>{
+                    this.$router.push('/info')
+                })
+                .catch(error=>{
+                    alert('Error')
+                })
         },
         reset(){
             this.email=''

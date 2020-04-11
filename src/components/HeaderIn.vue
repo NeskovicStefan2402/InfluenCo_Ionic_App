@@ -23,8 +23,8 @@ export default {
     },
     methods:{
         openNav(){
-            this.open=!this.open
-            eventBus.$emit('nav',this.open)
+            this.$store.state.open_menu=!this.$store.state.open_menu
+            console.log(this.$store.state.open_menu)
         }
     }
 }

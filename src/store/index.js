@@ -1,11 +1,13 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-
+// import axios from 'axios'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
     type:null,
+    open_menu:false,
+    interest:'',
     info:localStorage.getItem('info')==null ? true : false,
     companies:[
       {
@@ -70,17 +72,6 @@ export default new Vuex.Store({
       }
     ],
     influencer:{
-            first:'',
-            last:'',
-            email:'',
-            age:18,
-            interest:'',
-            youtube:'',
-            facebook:'',
-            twitter:'',
-            instagram:'',
-            password:'',
-            confirm_password:''
     },
     company:{
             name:'',
@@ -100,18 +91,79 @@ export default new Vuex.Store({
         password:''
       }
     },
-    types:[
-      'Sports',
-      'Music',
-      'Gaming',
-      'Fashion',
-      'Programming',
-      'Video'
-  ]
+    types:[]
   },
   mutations: {
+    
   },
   actions: {
+    loginInfluencer({commit,state},data){
+      console.log('Login open'+data['email'])
+      return new Promise((resolve,reject)=>{
+        axios.post('http://192.168.0.11:8000/loginInfluencer/',{
+          email:''+data['email'],
+          password:''+data['password']
+        })
+          .then(({data,status})=>{
+            if(status === 200){
+              state.influencer=data[0]['fields']
+              resolve(true);
+            }
+          })
+          .catch(error=>{
+            reject(error);
+        })
+      })
+    },
+    signUpInfluencer({commit,state},ele){
+      var obj={
+        email:''+ele['email'],
+        password:''+ele['password'],
+        first_name:''+ele['first_name'],
+        last_name:''+ele['last_name'],
+        instagram:''+ele['instagram'],
+        twitter:''+ele['twitter'],
+        facebook:''+ele['facebook'],
+        youtube:''+ele['youtube'],
+        age: ele['age'],
+        interest:''+ele['interest'],
+        
+      }
+      return new Promise((resolve,reject)=>{
+        axios.post('http://192.168.0.11:8000/signUpInfluencer/',obj)
+          .then(({data,status})=>{
+            if(status === 200){
+              
+              console.log(data)
+              resolve(true);
+            }
+          })
+          .catch(error=>{
+            console.log(error)
+            reject(error);
+        })
+      })
+    },
+    getInterests({commit,state}){
+      return new Promise((resolve,reject)=>{
+        axios.get('http://192.168.0.11:8000/getInterests/')
+          .then(({data,status})=>{
+            if(status === 200){
+              data.forEach(element => {
+                var obj={
+                  id:element['pk'],
+                  name:element['fields']['name'] 
+                }
+                state.types.push(obj)
+              });
+              resolve(true);
+            }
+          })
+          .catch(error=>{
+            reject(error);
+        })
+      })
+    }
   },
   modules: {
   }
