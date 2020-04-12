@@ -9,6 +9,11 @@ import HomeContent from '../components/HomeContent'
 export default{
     components:{
         HomeContent
+    },
+    created(){
+        if(JSON.parse(localStorage.getItem('influencer'))!=null){
+            this.$router.push('/home')
+        }
     }
 }
 </script>

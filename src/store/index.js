@@ -9,6 +9,16 @@ export default new Vuex.Store({
     open_menu:false,
     interest:'',
     info:localStorage.getItem('info')==null ? true : false,
+    youtube:{
+      followers:0,
+      videos:0,
+      views:0
+    },
+    instagram:{
+      followers:0,
+      following:0,
+      description:''
+    },
     companies:[
       {
         name: 'Coca Cola',
@@ -71,8 +81,7 @@ export default new Vuex.Store({
         price: 150.00
       }
     ],
-    influencer:{
-    },
+    influencer:JSON.parse(localStorage.getItem('influencer'))==null ? {} : JSON.parse(localStorage.getItem('influencer')),
     company:{
             name:'',
             description:'',
@@ -105,8 +114,26 @@ export default new Vuex.Store({
           password:''+data['password']
         })
           .then(({data,status})=>{
+            if(status === 200){ 
+              var inf=data[0]['fields']
+              inf["id"] = data[0]['pk']
+              localStorage.setItem('influencer',JSON.stringify(inf))
+              state.influencer=inf
+              resolve(true);
+            }
+          })
+          .catch(error=>{
+            reject(error);
+        })
+      })
+    },
+    uploadImage({commit,state},data){
+      console.log(data)
+      return new Promise((resolve,reject)=>{
+        axios.post('http://192.168.0.11:8000/uploadImage/',data)
+          .then(({data,status})=>{
             if(status === 200){
-              state.influencer=data[0]['fields']
+              console.log('Data is: '+data)
               resolve(true);
             }
           })
@@ -160,6 +187,66 @@ export default new Vuex.Store({
             }
           })
           .catch(error=>{
+            reject(error);
+        })
+      })
+    },
+    getYoutubeStats({commit,state}){
+      return new Promise((resolve,reject)=>{
+        axios.get('https://www.googleapis.com/youtube/v3/channels?part=statistics&id='+state.influencer.youtube+'&key=AIzaSyA8e2wuvlNnZpFubhTVuxfEL2KLzZYu4Wc')
+          .then(({data,status})=>{
+            if(status === 200){
+                state.youtube.followers=data['items'][0]['statistics']['subscriberCount']
+                state.youtube.videos=data['items'][0]['statistics']['videoCount']
+                state.youtube.views=data['items'][0]['statistics']['viewCount']
+              resolve(true);
+            }
+          })
+          .catch(error=>{
+            reject(error);
+        })
+      })
+    },
+    getInstagramStats({commit,state}){
+      return new Promise((resolve,reject)=>{
+        axios.get('https://www.instagram.com/'+state.influencer.instagram+'/?__a=1')
+          .then(({data,status})=>{
+            if(status === 200){
+                state.instagram.description=data['graphql']['user']['biography']
+                state.instagram.followers=data['graphql']['user']['edge_followed_by']['count']
+                state.instagram.following=data['graphql']['user']['edge_follow']['count']
+              resolve(true);
+            }
+          })
+          .catch(error=>{
+            reject(error);
+        })
+      })
+    },
+    updateInfluencer({commit,state},ele){
+      var obj={
+        id:state.influencer.id,
+        first_name:''+state.influencer.first_name,
+        last_name:''+state.influencer.last_name,
+        instagram:''+state.influencer.instagram,
+        youtube:''+state.influencer.youtube,
+        age: state.influencer.age,
+        
+      }
+      console.log(obj)
+      return new Promise((resolve,reject)=>{
+        axios.post('http://192.168.0.11:8000/updateInfluencer/',obj)
+          .then(({data,status})=>{
+            if(status === 200){
+              var inf=data[0]['fields']
+              inf["id"] = data[0]['pk']
+              localStorage.setItem('influencer',JSON.stringify(inf))
+              state.influencer=inf
+              resolve(true);
+            }
+          })
+          .catch(error=>{
+            console.log(error)
             reject(error);
         })
       })

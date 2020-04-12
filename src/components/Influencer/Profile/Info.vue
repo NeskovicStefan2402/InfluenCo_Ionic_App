@@ -33,8 +33,7 @@ export default {
     },
     
     interest_name() {
-      if (this.$store.state.types == []) {
-          console.log('If: '+this.$store.state.types.length)
+      if (this.$store.state.types.length == 0) {
         this.$store.dispatch("getInterests").then(success => {
           return this.getName()
         });

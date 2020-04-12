@@ -16,6 +16,9 @@ export default {
     methods:{
         open(){
             this.$store.state.open_menu=!this.$store.state.open_menu
+            if(this.data.name=='Logout'){
+                localStorage.setItem('influencer',null)
+            }
             this.$router.push(this.data.path)
         }
     }
