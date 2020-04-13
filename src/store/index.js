@@ -19,6 +19,7 @@ export default new Vuex.Store({
       following:0,
       description:''
     },
+    jobs:[],
     companies:[
       {
         name: 'Coca Cola',
@@ -123,6 +124,7 @@ export default new Vuex.Store({
             }
           })
           .catch(error=>{
+            console.log(error)
             reject(error);
         })
       })
@@ -248,6 +250,79 @@ export default new Vuex.Store({
           .catch(error=>{
             console.log(error)
             reject(error);
+        })
+      })
+    },
+    getActiveJobs({commit,state}){
+      return new Promise((resolve,reject)=>{
+        axios.
+        get('http://192.168.0.11:8000/getActiveJobs')
+        .then(({data,status})=>{
+          console.log(data)
+          state.jobs=[]
+          data.forEach(element => {
+            var obj=element['fields']
+            obj['id']=element['pk']
+            state.jobs.push(obj)
+          });
+          resolve(true)
+        })
+        .catch(error=>{
+          reject(error)
+        })
+      })
+    },
+    setInterestForJob({commit,state},ele){
+      return new Promise((reject,resolve)=>{
+        axios.
+        post('http://192.168.0.11:8000/setInterestForJob/',ele)
+        .then(({data,status})=>{
+          if(status==200){
+            state.influencer.interests=[]
+            data.forEach(element => {
+              var obj={
+                image:element['fields']['image'],
+                description:element['fields']['decription'],
+                price:element['fields']['price'],
+                name:element['fields']['name'],
+                id:element['pk']
+              }
+              console.log(obj)
+              state.influencer.interests.push(obj)
+            });
+            localStorage.setItem('influencer',JSON.stringify(state.influencer))
+            resolve(true)
+          }
+         
+        })
+        .catch(error=>{
+          reject(error)
+        })
+      })
+    },
+    getInterestsForInfluencer({commit,state}){
+      return new Promise((reject,resolve)=>{
+        axios.
+        get('http://192.168.0.11:8000/getInterestsForInfluencer/'+state.influencer.id)
+        .then(({data,status})=>{
+          if(status==200){
+            state.influencer.interests=[]
+            data.forEach(element => {
+              var obj={
+                image:element['fields']['image'],
+                description:element['fields']['decription'],
+                price:element['fields']['price'],
+                name:element['fields']['name'],
+                id:element['pk']
+              }
+              state.influencer.interests.push(obj)
+            });
+            localStorage.setItem('influencer',JSON.stringify(state.influencer))
+            resolve(true)
+          }
+        })
+        .catch(error=>{
+          reject(error)
         })
       })
     }

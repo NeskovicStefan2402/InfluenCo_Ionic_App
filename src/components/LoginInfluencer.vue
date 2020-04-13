@@ -38,6 +38,7 @@ export default {
                 }
                 this.$store.dispatch('loginInfluencer',data)
                 .then(success=>{
+                    this.$store.dispatch('getInterestsForInfluencer')
                     this.$router.push('/info')
                 })
                 .catch(error=>{
