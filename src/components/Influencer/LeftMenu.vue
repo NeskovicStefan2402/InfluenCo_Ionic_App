@@ -36,7 +36,7 @@ export default {
       },
       companies:{
         name:'Companies',
-        path:'/home'
+        path:'/companies'
       },
       logout:{
         name:'Logout',

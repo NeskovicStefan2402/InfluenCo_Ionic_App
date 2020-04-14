@@ -12,7 +12,7 @@
         <ion-row>
             <ion-col>
                 <ion-button color='success' @click="interest" v-if="!postoji" >Interest</ion-button>
-                <ion-button color='danger' @click="showAlert" v-else >Interested</ion-button>
+                <ion-button color='danger' @click="interest" v-else >Interested</ion-button>
             </ion-col>
             <ion-col>
                 <h3>{{company.price}} $</h3>
@@ -48,12 +48,6 @@ export default {
             this.$store.dispatch('setInterestForJob',{
                 'influencer':this.$store.state.influencer.id,
                 'job':this.company.id
-            })
-            .then(success=>{
-                alert('Correct interest!')
-            })
-            .catch(error=>{
-                alert('Error')
             })
         }
     }

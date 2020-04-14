@@ -26,12 +26,6 @@ export default {
     },
     methods:{
         login(){
-            // if(this.$store.state.info){
-                
-            // }else{
-            //     this.$router.push('/home')
-            // }
-            
             var data={
                     email:this.email,
                     password:this.password

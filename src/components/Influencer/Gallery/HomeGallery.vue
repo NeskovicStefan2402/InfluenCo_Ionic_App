@@ -15,11 +15,7 @@ export default {
     console.log(this.$store.state.companies)
     this.$store.dispatch('getActiveJobs')
                 .then(success=>{
-                    // this.$router.push('/info')
                     this.open=true
-                })
-                .catch(error=>{
-                    alert('Error')
                 })
   },
   data(){

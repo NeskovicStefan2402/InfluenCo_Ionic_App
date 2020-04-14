@@ -2,12 +2,14 @@ import Vue from 'vue'
 import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
 import SignUp from '../views/SignUp.vue'
+import Companies from '../views/FilterInfluencerPage.vue'
 import Info from '../views/InfoSlider.vue'
 import Start from '../views/Start.vue'
 import InfluencerProfile from '../views/InfluencerProfile.vue'
 import Interests from '../components/InfluencerInterests'
 import WelcomeHeader from '../components/WelcomeHeader'
 import Welcome from '../views/Welcome.vue'
+import CompanyInfo from '../views/CompanyInfoPage'
 import { IonicVueRouter } from "@ionic/vue";
 Vue.use(IonicVueRouter);
 
@@ -16,6 +18,16 @@ Vue.use(IonicVueRouter);
     path: '/',
     name: 'Home',
     component: Home
+  },
+  {
+    path: '/companies',
+    name: 'Companies',
+    component: Companies
+  },
+  {
+    path:'/companies/:id',
+    name:'companyInfo',
+    component: CompanyInfo
   },
   {
     path: '/interests',

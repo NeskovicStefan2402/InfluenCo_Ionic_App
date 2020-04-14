@@ -20,68 +20,9 @@ export default new Vuex.Store({
       description:''
     },
     jobs:[],
-    companies:[
-      {
-        name: 'Coca Cola',
-        image:'cocaCola.jpg',
-        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Et praesentium modi natus id accusamus iure corrupti accusantium exercitationem. Dolor beatae itaque debitis repudiandae vel id repellat quos labore, nisi fugiat quibusdam sapiente veritatis nihil tempora neque sunt eius, aspernatur molestiae magni esse unde voluptatum harum in. Consectetur est repudiandae quasi.",
-        price: 150.00
-      },
-      {
-        name: 'EA Sports',
-        image:'eaSport.jpg',
-        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Et praesentium modi natus id accusamus iure corrupti accusantium exercitationem. Dolor beatae itaque debitis repudiandae vel id repellat quos labore, nisi fugiat quibusdam sapiente veritatis nihil tempora neque sunt eius, aspernatur molestiae magni esse unde voluptatum harum in. Consectetur est repudiandae quasi.",
-        price: 180.00
-      },
-      {
-        name: 'Herbalife',
-        image:'herbalife.jpg',
-        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Et praesentium modi natus id accusamus iure corrupti accusantium exercitationem. Dolor beatae itaque debitis repudiandae vel id repellat quos labore, nisi fugiat quibusdam sapiente veritatis nihil tempora neque sunt eius, aspernatur molestiae magni esse unde voluptatum harum in. Consectetur est repudiandae quasi.",
-        price: 200.00
-      },
-      {
-        name: 'Jaffa',
-        image:'jaffa.jpg',
-        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Et praesentium modi natus id accusamus iure corrupti accusantium exercitationem. Dolor beatae itaque debitis repudiandae vel id repellat quos labore, nisi fugiat quibusdam sapiente veritatis nihil tempora neque sunt eius, aspernatur molestiae magni esse unde voluptatum harum in. Consectetur est repudiandae quasi.",
-        price: 150.00
-      },
-      {
-        name: 'Knjaz Milos',
-        image:'knjazMilos.png',
-        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Et praesentium modi natus id accusamus iure corrupti accusantium exercitationem. Dolor beatae itaque debitis repudiandae vel id repellat quos labore, nisi fugiat quibusdam sapiente veritatis nihil tempora neque sunt eius, aspernatur molestiae magni esse unde voluptatum harum in. Consectetur est repudiandae quasi.",
-        price: 100.00
-      },
-      {
-        name: 'Lenovo',
-        image:'lenovo.jpg',
-        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Et praesentium modi natus id accusamus iure corrupti accusantium exercitationem. Dolor beatae itaque debitis repudiandae vel id repellat quos labore, nisi fugiat quibusdam sapiente veritatis nihil tempora neque sunt eius, aspernatur molestiae magni esse unde voluptatum harum in. Consectetur est repudiandae quasi.",
-        price: 180.00
-      },
-      {
-        name: 'Logitech',
-        image:'logitech.jpg',
-        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Et praesentium modi natus id accusamus iure corrupti accusantium exercitationem. Dolor beatae itaque debitis repudiandae vel id repellat quos labore, nisi fugiat quibusdam sapiente veritatis nihil tempora neque sunt eius, aspernatur molestiae magni esse unde voluptatum harum in. Consectetur est repudiandae quasi.",
-        price: 120.00
-      },
-      {
-        name: 'Pepsi',
-        image:'pepsi.jpg',
-        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Et praesentium modi natus id accusamus iure corrupti accusantium exercitationem. Dolor beatae itaque debitis repudiandae vel id repellat quos labore, nisi fugiat quibusdam sapiente veritatis nihil tempora neque sunt eius, aspernatur molestiae magni esse unde voluptatum harum in. Consectetur est repudiandae quasi.",
-        price: 150.00
-      },
-      {
-        name: 'Redbull',
-        image:'redbull.jpg',
-        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Et praesentium modi natus id accusamus iure corrupti accusantium exercitationem. Dolor beatae itaque debitis repudiandae vel id repellat quos labore, nisi fugiat quibusdam sapiente veritatis nihil tempora neque sunt eius, aspernatur molestiae magni esse unde voluptatum harum in. Consectetur est repudiandae quasi.",
-        price: 350.00
-      },
-      {
-        name: 'Swisslion Takovo',
-        image:'swisslion.jpg',
-        description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Et praesentium modi natus id accusamus iure corrupti accusantium exercitationem. Dolor beatae itaque debitis repudiandae vel id repellat quos labore, nisi fugiat quibusdam sapiente veritatis nihil tempora neque sunt eius, aspernatur molestiae magni esse unde voluptatum harum in. Consectetur est repudiandae quasi.",
-        price: 150.00
-      }
-    ],
+    companies:[],
+    filterData:'',
+    typeData:-1,
     influencer:JSON.parse(localStorage.getItem('influencer'))==null ? {} : JSON.parse(localStorage.getItem('influencer')),
     company:{
             name:'',
@@ -325,7 +266,46 @@ export default new Vuex.Store({
           reject(error)
         })
       })
+    },
+    getCompanies({commit,state}){
+      return new Promise((reject,resolve)=>{
+        axios.
+        get('http://192.168.0.11:8000/getCompanies/')
+        .then(({data,status})=>{
+          console.log(data)
+          state.companies=[]
+          data.forEach(element => {
+            var obj=element['fields']
+            obj['id']=element['pk']
+            state.companies.push(obj)
+          });
+          resolve(true)
+        })
+        .catch(error=>{
+          reject(error)
+        })
+      })
+    },
+    getCompanyTypes({commit,state}){
+      return new Promise((reject,resolve)=>{
+        axios.
+        get('http://192.168.0.11:8000/getCompanyTypes/')
+        .then(({data,status})=>{
+          console.log(data)
+          state.types=[]
+          data.forEach(element => {
+            var obj=element['fields']
+            obj['id']=element['pk']
+            state.types.push(obj)
+          });
+          resolve(true)
+        })
+        .catch(error=>{
+          reject(error)
+        })
+      })
     }
+
   },
   modules: {
   }

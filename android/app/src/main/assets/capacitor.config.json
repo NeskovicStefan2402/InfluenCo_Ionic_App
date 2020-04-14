@@ -1,8 +1,13 @@
 {
   "appId": "com.example.app",
-  "appName": "android_ionic",
+  "appName": "ionic_app",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "dist",
-  "cordova": {}
+  "cordova": {},
+  "server": {
+    "allowNavigation": [
+      []
+    ]
+  }
 }

@@ -4,22 +4,24 @@
         <ion-content  id='nesto'>
                 <Menu v-if='$store.state.open_menu==true'/>
             <div v-else>
-                <Gallery />
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro culpa dignissimos sed nobis labore ex maxime esse, eaque veniam deleniti amet impedit quam temporibus. Magnam in molestias necessitatibus iste, id corporis, saepe nostrum libero perspiciatis, fugit aut quibusdam beatae est aliquid placeat laboriosam iure atque! Sequi saepe ut amet accusantium.
+                <FilterCompany/>
+                <ListOfCompanies />
             </div>
         </ion-content>
     </ion-page>
 </template>
 <script>
 import Menu from '../components/Influencer/LeftMenu'
-import Gallery from '../components/Influencer/Gallery/HomeGallery'
+import FilterCompany from '../components/Influencer/FilterCompany/Filter'
+import ListOfCompanies from '../components/Influencer/FilterCompany/ListOfCompanies'
 import HeaderIn from '../components/HeaderIn'
 import eventBus from '../main'
 export default {
     components:{
-        Menu,
+        FilterCompany,
+        ListOfCompanies,
         HeaderIn,
-        Gallery
+        Menu
     },
     data(){
         return{
@@ -34,4 +36,7 @@ export default {
 }
 </script>
 <style scoped>
+ion-page{
+    background-color: rgb(208, 213, 213);
+}
 </style>
