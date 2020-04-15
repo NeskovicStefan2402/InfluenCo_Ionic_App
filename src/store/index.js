@@ -8,6 +8,7 @@ export default new Vuex.Store({
     type:null,
     open_menu:false,
     interest:'',
+    filterJob:'',
     info:localStorage.getItem('info')==null ? true : false,
     youtube:{
       followers:0,

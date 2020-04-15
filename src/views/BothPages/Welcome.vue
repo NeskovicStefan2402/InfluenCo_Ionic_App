@@ -4,7 +4,7 @@
     </div>
 </template>
 <script>
-import WelcomeHeader from '../components/WelcomeHeader'
+import WelcomeHeader from '../../components/StartComponents/WelcomeHeader'
 import Login from './Login'
 import SignUp from './SignUp'
 export default {

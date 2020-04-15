@@ -11,11 +11,11 @@
     </ion-page>
 </template>
 <script>
-import Menu from '../components/Influencer/LeftMenu'
-import FilterCompany from '../components/Influencer/FilterCompany/Filter'
-import ListOfCompanies from '../components/Influencer/FilterCompany/ListOfCompanies'
-import HeaderIn from '../components/HeaderIn'
-import eventBus from '../main'
+import Menu from '../../components/Influencer/Menu/LeftMenu'
+import FilterCompany from '../../components/Influencer/FilterCompany/Filter'
+import ListOfCompanies from '../../components/Influencer/FilterCompany/ListOfCompanies'
+import HeaderIn from '../../components/StartComponents/HeaderIn'
+import eventBus from '../../main'
 export default {
     components:{
         FilterCompany,

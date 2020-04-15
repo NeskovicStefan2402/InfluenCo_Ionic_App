@@ -12,11 +12,11 @@
     </ion-page>
 </template>
 <script>
-import Menu from '../components/Influencer/LeftMenu'
-import Info from '../components/Influencer/CompanyInfo/InfoCard'
-import Gallery from '../components/Influencer/CompanyInfo/CompanyActiveJobs'
-import HeaderIn from '../components/HeaderIn'
-import eventBus from '../main'
+import Menu from '../../components/Influencer/Menu/LeftMenu'
+import Info from '../../components/Influencer/CompanyInfo/InfoCard'
+import Gallery from '../../components/Influencer/CompanyInfo/CompanyActiveJobs'
+import HeaderIn from '../../components/StartComponents/HeaderIn'
+import eventBus from '../../main'
 export default {
     components:{
         Menu,

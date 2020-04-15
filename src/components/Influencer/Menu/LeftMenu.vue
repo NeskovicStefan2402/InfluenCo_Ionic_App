@@ -1,7 +1,6 @@
 <template>
       <div  v-if="$store.state.open_menu==true" id="menu" class="sidenav animated fadeInLeft">
           <ion-content color="dark" >
-            <!-- <ion-label class="closebtn" @click="closeNav()">&times;</ion-label> -->
             <Profile />
             <MenuItem :data='home'/>
             <MenuItem :data='profile'/>
@@ -14,7 +13,7 @@
         </div>
 </template>
 <script>
-import eventBus from "../../main";
+import eventBus from "../../../main";
 import Profile from "./ProfileCard";
 import Icons from "./Icons";
 import MenuItem from './MenuItem'

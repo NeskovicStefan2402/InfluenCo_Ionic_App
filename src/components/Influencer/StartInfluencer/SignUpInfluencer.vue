@@ -45,8 +45,8 @@
     </ion-content>
 </template>
 <script>
-import Interests from '../components/InfluencerInterests'
-import eventBus from '../main'
+import Interests from './InfluencerInterests'
+import eventBus from '../../../main'
 export default {
     components:{
         Interests

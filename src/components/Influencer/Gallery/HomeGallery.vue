@@ -1,6 +1,6 @@
 <template>
   <ion-slides v-if='open' pager="true" :options="slideOpts">
-    <ion-slide v-for="i in $store.state.jobs">
+    <ion-slide v-for="i in favorites">
       <GalleryCard :company='i'/>
     </ion-slide>
   </ion-slides>
@@ -12,11 +12,21 @@ export default {
     GalleryCard
   },
   created(){
-    console.log(this.$store.state.companies)
     this.$store.dispatch('getActiveJobs')
                 .then(success=>{
                     this.open=true
                 })
+  },
+  computed:{
+    favorites(){
+      var lista=this.$store.state.jobs.slice(0)
+      lista.sort((a,b)=>{
+        var x = a.price
+        var y = b.price
+        return x < y ? 1 : x > y ? -1 : 0
+      })
+      return lista.splice(0,5)
+    }
   },
   data(){
         return{

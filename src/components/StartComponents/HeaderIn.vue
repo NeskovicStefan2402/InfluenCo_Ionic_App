@@ -6,7 +6,7 @@
                             <a @click="openNav()" style="font-size:30px;cursor:pointer; color:black;">&#9776;</a>
                         </ion-col>
                         <ion-col>
-                            <img src="../assets/influencer.png" >
+                            <img src="../../assets/influencer.png" @click="$router.push('/home')">
                         </ion-col>
                         <ion-col></ion-col>
                     </ion-row>
@@ -14,7 +14,7 @@
     </ion-header>
 </template>
 <script>
-import eventBus from '../main'
+import eventBus from '../../main'
 export default {
     data(){
         return{

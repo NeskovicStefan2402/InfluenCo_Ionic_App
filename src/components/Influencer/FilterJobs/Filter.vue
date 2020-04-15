@@ -1,19 +1,19 @@
 <template>
   <ion-row>
-    <ion-col size="8">
+    <ion-col >
       <ion-searchbar
         show-cancel-button="never"
-        :value="$store.state.filterData"
-        @input="$store.state.filterData=$event.target.value"
-        @ionClear="$store.state.filterData=''"
+        :value="$store.state.filterJob"
+        @input="$store.state.filterJob=$event.target.value"
+        @ionClear="$store.state.filterJob=''"
       ></ion-searchbar>
     </ion-col>
-    <ion-col size="4">
+    <!-- <ion-col size="4">
           <select id='types' @change="onChange($event)">
               <option value="-1">All types</option>
               <option v-for="i in $store.state.types" :value="i.id">{{i.name}}</option>
           </select>
-    </ion-col>
+    </ion-col> -->
   </ion-row>
 </template>
 <script>
@@ -24,15 +24,14 @@ export default {
         }
     },
     created(){
-        this.$store.dispatch('getCompanyTypes')
+        // this.$store.dispatch('getCompanyTypes')
         // this.postSelected()
 
     },
-    methods:{
-        
+    methods:{        
         onChange(event){
-            this.$store.state.typeData = event.target.value
-            console.log(this.type)
+            // this.$store.state.typeData = event.target.value
+            // console.log(this.type)
         }
     }
 }

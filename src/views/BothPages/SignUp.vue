@@ -3,8 +3,8 @@
     <SignUpCompany v-else/>
 </template>
 <script>
-import SignUpInfluencer from '../components/SignUpInfluencer'
-import SignUpCompany from '../components/SignUpCompany'
+import SignUpInfluencer from '../../components/Influencer/StartInfluencer/SignUpInfluencer'
+import SignUpCompany from '../../components/Company/StartCompany/SignUpCompany'
 export default {
     components:{
         SignUpInfluencer,

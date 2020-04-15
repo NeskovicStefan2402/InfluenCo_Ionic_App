@@ -12,9 +12,9 @@
   </ion-slides>
 </template>
 <script>
-import About from '../components/Slides/AboutSlide'
-import Welcome from '../components/Slides/WelcomeSlide'
-import Last from '../components/Slides/LastSlide'
+import About from '../../components/Slides/AboutSlide'
+import Welcome from '../../components/Slides/WelcomeSlide'
+import Last from '../../components/Slides/LastSlide'
 export default {
     components:{
         About,

@@ -20,12 +20,12 @@
     </ion-page>
 </template>
 <script>
-import Info from '../components/Influencer/Profile/Info'
-import HeaderIn from '../components/HeaderIn'
-import Icons from '../components/Influencer/Icons'
-import InterestsJob from '../components/Influencer/Profile/InterestsForJob/InterestsForJob'
-import Menu from '../components/Influencer/LeftMenu'
-import Stats from '../components/Influencer/Profile/Stats'
+import Info from '../../components/Influencer/Profile/Info'
+import HeaderIn from '../../components/StartComponents/HeaderIn'
+import Icons from '../../components/Influencer/Menu/Icons'
+import InterestsJob from '../../components/Influencer/Profile/InterestsForJob/InterestsForJob'
+import Menu from '../../components/Influencer/Menu/LeftMenu'
+import Stats from '../../components/Influencer/Profile/Stats'
 export default {
     components:{
         Info,
