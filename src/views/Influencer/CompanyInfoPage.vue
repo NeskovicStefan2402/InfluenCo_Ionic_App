@@ -2,7 +2,8 @@
     <ion-page>
         <HeaderIn/>
         <ion-content  id='nesto'>
-                <Menu v-if='$store.state.open_menu==true'/>
+                <Menu v-if="$store.state.open_menu==true && postojiInfluencer"/>
+                <MenuCompany v-if="$store.state.open_menu==true && postojiCompany"/>
             <div v-else>
                 <Info :company='com'/>
                 <h3>Active jobs from this company: </h3>
@@ -13,6 +14,7 @@
 </template>
 <script>
 import Menu from '../../components/Influencer/Menu/LeftMenu'
+import MenuCompany from '../../components/Company/Menu/LeftMenu'
 import Info from '../../components/Influencer/CompanyInfo/InfoCard'
 import Gallery from '../../components/Influencer/CompanyInfo/CompanyActiveJobs'
 import HeaderIn from '../../components/StartComponents/HeaderIn'
@@ -22,7 +24,8 @@ export default {
         Menu,
         HeaderIn,
         Info,
-        Gallery
+        Gallery,
+        MenuCompany
     },
     data(){
         return{
@@ -30,8 +33,12 @@ export default {
             id:''
         }
     },
+    methods:{
+        
+    },
     created() {
         this.id = this.$route.params.id;
+        
     },
     computed:{
         com(){
@@ -43,6 +50,12 @@ export default {
             });
             
             return obj
+        },
+        postojiInfluencer(){
+            return JSON.parse(localStorage.getItem('influencer'))!=null
+        },
+        postojiCompany(){
+            return JSON.parse(localStorage.getItem('company'))!=null
         }
     },
     mounted() {

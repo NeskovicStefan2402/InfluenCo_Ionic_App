@@ -10,10 +10,6 @@
     </ion-card-content>
     <ion-card-footer>
         <ion-row>
-            <ion-col v-if="postojiInfluencer">
-                <ion-button color='success' @click="interest" v-if="!postoji" >Interest</ion-button>
-                <ion-button color='danger' @click="interest" v-else >Interested</ion-button>
-            </ion-col>
             <ion-col>
                 <h3>{{company.price}} $</h3>
             </ion-col>
@@ -30,18 +26,13 @@ export default {
         image() {
             return "http://192.168.0.11:8000/uploads/" + this.company.image;
         },
-        postojiInfluencer(){
-            return JSON.parse(localStorage.getItem('influencer'))!=null
-        },
         postoji(){
             var odg=false
-            
             this.$store.state.influencer.interests.forEach(element => {
-                    if(element['id']==this.company.id){
-                        odg=true;
-                    }
-                });
-            
+                if(element['id']==this.company.id){
+                    odg=true;
+                }
+            });
             return odg;
         }
     },

@@ -20,19 +20,14 @@ export default new Vuex.Store({
       following:0,
       description:''
     },
+    popular:[],
     jobs:[],
     companies:[],
+    influencers:[],
     filterData:'',
     typeData:-1,
+    company:JSON.parse(localStorage.getItem('company'))==null ? {} : JSON.parse(localStorage.getItem('company')),
     influencer:JSON.parse(localStorage.getItem('influencer'))==null ? {} : JSON.parse(localStorage.getItem('influencer')),
-    company:{
-            name:'',
-            description:'',
-            id:'',
-            site:'',
-            password:'',
-            confirm_password:''
-    },
     login:{
       influencer:{
         email:'stefan.neskovic@elab.rs',
@@ -43,6 +38,7 @@ export default new Vuex.Store({
         password:''
       }
     },
+    history:[],
     types:[]
   },
   mutations: {
@@ -50,7 +46,6 @@ export default new Vuex.Store({
   },
   actions: {
     loginInfluencer({commit,state},data){
-      console.log('Login open'+data['email'])
       return new Promise((resolve,reject)=>{
         axios.post('http://192.168.0.11:8000/loginInfluencer/',{
           email:''+data['email'],
@@ -66,18 +61,15 @@ export default new Vuex.Store({
             }
           })
           .catch(error=>{
-            console.log(error)
             reject(error);
         })
       })
     },
     uploadImage({commit,state},data){
-      console.log(data)
       return new Promise((resolve,reject)=>{
         axios.post('http://192.168.0.11:8000/uploadImage/',data)
           .then(({data,status})=>{
             if(status === 200){
-              console.log('Data is: '+data)
               resolve(true);
             }
           })
@@ -104,13 +96,10 @@ export default new Vuex.Store({
         axios.post('http://192.168.0.11:8000/signUpInfluencer/',obj)
           .then(({data,status})=>{
             if(status === 200){
-              
-              console.log(data)
               resolve(true);
             }
           })
           .catch(error=>{
-            console.log(error)
             reject(error);
         })
       })
@@ -120,6 +109,7 @@ export default new Vuex.Store({
         axios.get('http://192.168.0.11:8000/getInterests/')
           .then(({data,status})=>{
             if(status === 200){
+              state.types=[]
               data.forEach(element => {
                 var obj={
                   id:element['pk'],
@@ -177,7 +167,6 @@ export default new Vuex.Store({
         age: state.influencer.age,
         
       }
-      console.log(obj)
       return new Promise((resolve,reject)=>{
         axios.post('http://192.168.0.11:8000/updateInfluencer/',obj)
           .then(({data,status})=>{
@@ -190,7 +179,6 @@ export default new Vuex.Store({
             }
           })
           .catch(error=>{
-            console.log(error)
             reject(error);
         })
       })
@@ -200,7 +188,6 @@ export default new Vuex.Store({
         axios.
         get('http://192.168.0.11:8000/getActiveJobs')
         .then(({data,status})=>{
-          console.log(data)
           state.jobs=[]
           data.forEach(element => {
             var obj=element['fields']
@@ -229,7 +216,6 @@ export default new Vuex.Store({
                 name:element['fields']['name'],
                 id:element['pk']
               }
-              console.log(obj)
               state.influencer.interests.push(obj)
             });
             localStorage.setItem('influencer',JSON.stringify(state.influencer))
@@ -273,7 +259,6 @@ export default new Vuex.Store({
         axios.
         get('http://192.168.0.11:8000/getCompanies/')
         .then(({data,status})=>{
-          console.log(data)
           state.companies=[]
           data.forEach(element => {
             var obj=element['fields']
@@ -292,7 +277,6 @@ export default new Vuex.Store({
         axios.
         get('http://192.168.0.11:8000/getCompanyTypes/')
         .then(({data,status})=>{
-          console.log(data)
           state.types=[]
           data.forEach(element => {
             var obj=element['fields']
@@ -305,8 +289,104 @@ export default new Vuex.Store({
           reject(error)
         })
       })
+    },
+    loginCompany({commit, state},ele){
+      var obj={
+        name: ''+ele.name,
+        password: ''+ele.password
+      }
+      return new Promise((resolve,reject)=>{
+        axios.
+        post('http://192.168.0.11:8000/loginCompany/',obj)
+        .then(({data,status})=>{
+          if(status==200){
+            // state.company=data[0]
+              var company=data[0]['fields']
+              company["id"] = data[0]['pk']
+              localStorage.setItem('company',JSON.stringify(company))
+              state.company=company
+              resolve(true);
+          }
+        })
+        .catch(error=>{
+        })
+      })
+    },
+    getPopularInfluencers({commit,state}){
+      return new Promise((resolve,reject)=>{
+        axios.
+        get('http://192.168.0.11:8000/getPopularInfluencers')
+        .then(({data,status})=>{
+          // var object=JSON.parse(data)
+          state.popular=[]
+          data.forEach(element => {
+            state.popular.push(element)
+          });
+          resolve(true)
+        })
+        .catch(error=>{
+          reject(error)
+        })
+      })
+    },
+    getInfluencers({commit,state}){
+      return new Promise((reject,resolve)=>{
+        axios.
+        get('http://192.168.0.11:8000/getInfluencers/')
+        .then(({data,status})=>{
+          state.influencers=[]
+          data.forEach(element => {
+            var obj=element['fields']
+            obj['id']=element['pk']
+            state.influencers.push(obj)
+          });
+          resolve(true)
+        })
+        .catch(error=>{
+          reject(error)
+        })
+      })
+    },
+    getJobs({commit,state}){
+      return new Promise((resolve,reject)=>{
+        axios.
+        get('http://192.168.0.11:8000/getJobsForCompany/'+state.company.id)
+        .then(({data,status})=>{
+          state.history=[]
+          data.forEach(element => {
+            var obj=element['fields']
+            obj['id']=element['pk']
+            state.history.push(obj)
+          });
+          resolve(true)
+        })
+        .catch(error=>{
+          reject(error)
+        })
+      })
+    },
+    updateCompany({commit,state},ele){
+      var obj={
+        id:state.company.id,
+        name:''+state.company.name,
+        desription:''+state.company.desription
+      }
+      return new Promise((resolve,reject)=>{
+        axios.post('http://192.168.0.11:8000/updateCompany/',obj)
+          .then(({data,status})=>{
+            if(status === 200){
+              var com=data[0]['fields']
+              com["id"] = data[0]['pk']
+              localStorage.setItem('company',JSON.stringify(com))
+              state.company=com
+              resolve(true);
+            }
+          })
+          .catch(error=>{
+            reject(error);
+        })
+      })
     }
-
   },
   modules: {
   }

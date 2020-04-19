@@ -13,6 +13,8 @@ export default{
     created(){
         if(JSON.parse(localStorage.getItem('influencer'))!=null){
             this.$router.push('/home')
+        }else if(JSON.parse(localStorage.getItem('company'))!=null){
+            this.$router.push('/homeCompany')
         }
     }
 }

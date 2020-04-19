@@ -1,10 +1,10 @@
 <template>
     <ion-content>
         <ion-item>
-            <ion-input placeholder="Name" :value="name"></ion-input>
+            <ion-input placeholder="Name" :value="company.name" @input="company.name = $event.target.value"></ion-input>
         </ion-item>
         <ion-item>
-            <ion-input type='password' placeholder="Password" :value="password"></ion-input>
+            <ion-input type='password' placeholder="Password" :value="company.password" @input="company.password = $event.target.value"></ion-input>
         </ion-item>
         <ion-row>
             <ion-col>
@@ -20,22 +20,26 @@
 export default {
     data(){
         return{
-            name:'',
-            password:''
+            company:{
+                name:'',
+                password:''
+            }
         }
     },
     methods:{
         login(){
-            if(this.$store.state.info){
-                localStorage.setItem('info',true)
+            this.$store.dispatch('loginCompany',this.company)
+            .then(success=>{
+                console.log('Uspesno logovanje!')
                 this.$router.push('/info')
-            }else{
-                this.$router.push('/home')
-            }
+            })
+            .catch(error=>{
+                console.log(error)
+            })
         },
         reset(){
-            this.name=''
-            this.password=''
+            this.company.name=''
+            this.company.password=''
         }
     }
 }

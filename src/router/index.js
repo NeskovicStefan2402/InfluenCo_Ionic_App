@@ -4,7 +4,9 @@ import Login from '../views/BothPages/Login.vue'
 import SignUp from '../views/BothPages/SignUp.vue'
 import Companies from '../views/Influencer/FilterInfluencerPage.vue'
 import Info from '../views/BothPages/InfoSlider.vue'
+import YourCompany from '../views/Company/YourCompany'
 import Start from '../views/Influencer/StartInfluencer.vue'
+import StartCompany from '../views/Company/StartCompany.vue'
 import InfluencerProfile from '../views/Influencer/InfluencerProfile.vue'
 import Interests from '../components/Influencer/StartInfluencer/InfluencerInterests'
 import WelcomeHeader from '../components/StartComponents/WelcomeHeader'
@@ -35,9 +37,19 @@ Vue.use(IonicVueRouter);
     component: Interests
   },
   {
+    path: '/yourCompany',
+    name: 'YourCompany',
+    component: YourCompany
+  },
+  {
     path: '/home',
     name: 'Start',
     component: Start
+  },
+  {
+    path: '/homeCompany',
+    name: 'StartCompany',
+    component: StartCompany
   },
   {
     path: '/info',

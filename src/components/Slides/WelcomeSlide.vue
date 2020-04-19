@@ -26,7 +26,11 @@
 export default {
     methods:{
         skip(){
-            this.$router.push('/home')
+            if(JSON.parse(localStorage.getItem('influencer'))!=null){
+                this.$router.push('/home')
+            }else if(JSON.parse(localStorage.getItem('company'))!=null){
+                this.$router.push('/homeCompany')
+            }
         }    
     }
 }
