@@ -11,12 +11,13 @@
     <ion-col size="4">
           <select id='types' @change="onChange($event)">
               <option value="-1">All types</option>
-              <option v-for="i in $store.state.types" :value="i.id">{{i.name}}</option>
+              <option v-for="i in $store.state.interests" :value="i.id">{{i.name}}</option>
           </select>
     </ion-col>
   </ion-row>
 </template>
 <script>
+import eventBus from '../../../main'
 export default {
     data(){
         return{
@@ -30,6 +31,7 @@ export default {
         
         onChange(event){
             this.$store.state.typeData = event.target.value
+            eventBus.$emit('changeInterests')
         }
     }
 }

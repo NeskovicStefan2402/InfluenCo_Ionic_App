@@ -6,16 +6,16 @@
     <ion-card-content>
         <img :src="image" class="slika" />
         <br>
+        <ion-card class="finished">
+            {{name}}
+        </ion-card>
         {{job.description}}
     </ion-card-content>
     <ion-card-footer>
         <ion-row>
+            <ion-col></ion-col>
+            <ion-col size='4'><h3>{{job.price}} $</h3></ion-col>
             <ion-col>
-                <ion-button color='primary' @click="edit">Edit</ion-button>
-            </ion-col>
-            <ion-col size='3'></ion-col>
-            <ion-col>
-                <h3>{{job.price}} $</h3>
             </ion-col>
         </ion-row>
     </ion-card-footer>
@@ -30,6 +30,15 @@ export default {
         image() {
             return "http://192.168.0.11:8000/uploads/" + this.job.image;
         },
+        name(){
+            var ele=''
+            this.$store.state.influencers.forEach(element => {
+                if( element.id == this.job.selected){
+                    ele = element.first_name+ ' '+ element.last_name
+                }
+            });
+            return ele
+        },
         postoji(){
             var odg=false
             this.$store.state.influencer.interests.forEach(element => {
@@ -40,11 +49,6 @@ export default {
             return odg;
         }
     },
-    methods:{
-        edit(){
-            this.$router.push('/editJob/'+this.job.id)
-        }
-    }
 }
 </script>
 <style scoped>
@@ -52,5 +56,13 @@ export default {
 .slika{
     height: 200px;
     width: 100%;
+}
+.finished{
+    background-color: rgb(77, 9, 9);
+    color: white;
+    padding: 10px;
+    width: 100%;
+    border: 0 ;
+    border-radius: 0;
 }
 </style>

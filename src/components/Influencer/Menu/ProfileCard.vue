@@ -14,7 +14,7 @@
 export default {
     computed:{
         image(){
-            return 'http://192.168.0.11:8000/'+this.$store.state.influencer.image
+            return 'http://192.168.0.11:8000/uploads/'+this.$store.state.influencer.image
         }
     }
 }

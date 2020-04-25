@@ -14,7 +14,7 @@
         </ion-toolbar>
     </ion-header>
     <ion-content>
-        <ion-item v-for="i,index in $store.state.types" @click="selectItem(i)">
+        <ion-item v-for="i,index in $store.state.interests" @click="selectItem(i)">
             <ion-col>
                 {{i.name}}
             </ion-col>

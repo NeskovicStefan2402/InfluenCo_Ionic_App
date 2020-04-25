@@ -13,14 +13,14 @@
         <div v-else>
             <ion-slides v-if='open' pager="true" :options="slideOpts">
                 <ion-slide v-for="i in $store.state.history">
-                    <GalleryCard :company='i'/>
+                    <GalleryCard :job='i'/>
                 </ion-slide>
             </ion-slides>
         </div>
     </div> 
 </template>
 <script>
-import GalleryCard from './JobCard'
+import GalleryCard from './HistoryCard'
 export default {
   components:{
     GalleryCard

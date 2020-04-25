@@ -5,6 +5,9 @@ import SignUp from '../views/BothPages/SignUp.vue'
 import Companies from '../views/Influencer/FilterInfluencerPage.vue'
 import Info from '../views/BothPages/InfoSlider.vue'
 import YourCompany from '../views/Company/YourCompany'
+import EditJob from '../views/Company/EditJob'
+import NewJob from '../views/Company/NewJob'
+import MenuManage from '../views/Company/MenuManage'
 import Start from '../views/Influencer/StartInfluencer.vue'
 import StartCompany from '../views/Company/StartCompany.vue'
 import InfluencerProfile from '../views/Influencer/InfluencerProfile.vue'
@@ -32,6 +35,11 @@ Vue.use(IonicVueRouter);
     component: CompanyInfo
   },
   {
+    path:'/editJob/:id',
+    name:'EditJob',
+    component: EditJob
+  },
+  {
     path: '/interests',
     name: 'Interests',
     component: Interests
@@ -39,7 +47,7 @@ Vue.use(IonicVueRouter);
   {
     path: '/yourCompany',
     name: 'YourCompany',
-    component: YourCompany
+    component:YourCompany
   },
   {
     path: '/home',

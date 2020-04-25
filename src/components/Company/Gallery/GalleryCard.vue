@@ -33,7 +33,7 @@ export default {
     ,
     computed: {
         image() {
-            return "http://192.168.0.11:8000/" + this.influencer.fields.image;
+            return "http://192.168.0.11:8000/uploads/" + this.influencer.fields.image;
         },
     },
     methods:{

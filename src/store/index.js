@@ -22,6 +22,9 @@ export default new Vuex.Store({
     },
     popular:[],
     jobs:[],
+    jobId:'',
+    selectedInfluencer:null,
+    interestedInfluencers:[],
     companies:[],
     influencers:[],
     filterData:'',
@@ -65,9 +68,35 @@ export default new Vuex.Store({
         })
       })
     },
-    uploadImage({commit,state},data){
+    uploadCompanyLogo({commit,state},data){
       return new Promise((resolve,reject)=>{
-        axios.post('http://192.168.0.11:8000/uploadImage/',data)
+        axios.post('http://192.168.0.11:8000/uploadImage/company/'+state.company.id,data)
+          .then(({data,status})=>{
+            if(status === 200){
+              resolve(true);
+            }
+          })
+          .catch(error=>{
+            reject(error);
+        })
+      })
+    },
+    uploadInfluencerImage({commit,state},data){
+      return new Promise((resolve,reject)=>{
+        axios.post('http://192.168.0.11:8000/uploadImage/influencer/'+state.influencer.id,data)
+          .then(({data,status})=>{
+            if(status === 200){
+              resolve(true);
+            }
+          })
+          .catch(error=>{
+            reject(error);
+        })
+      })
+    },
+    uploadCompanyJobImage({commit,state},data){
+      return new Promise((resolve,reject)=>{
+        axios.post('http://192.168.0.11:8000/uploadImage/job/'+data[0],data[1])
           .then(({data,status})=>{
             if(status === 200){
               resolve(true);
@@ -109,13 +138,13 @@ export default new Vuex.Store({
         axios.get('http://192.168.0.11:8000/getInterests/')
           .then(({data,status})=>{
             if(status === 200){
-              state.types=[]
+              state.interests=[]
               data.forEach(element => {
                 var obj={
                   id:element['pk'],
                   name:element['fields']['name'] 
                 }
-                state.types.push(obj)
+                state.interests.push(obj)
               });
               resolve(true);
             }
@@ -171,8 +200,10 @@ export default new Vuex.Store({
         axios.post('http://192.168.0.11:8000/updateInfluencer/',obj)
           .then(({data,status})=>{
             if(status === 200){
+              var interests= state.influencer.interests
               var inf=data[0]['fields']
               inf["id"] = data[0]['pk']
+              inf['interests']=interests
               localStorage.setItem('influencer',JSON.stringify(inf))
               state.influencer=inf
               resolve(true);
@@ -379,6 +410,118 @@ export default new Vuex.Store({
               com["id"] = data[0]['pk']
               localStorage.setItem('company',JSON.stringify(com))
               state.company=com
+              resolve(true);
+            }
+          })
+          .catch(error=>{
+            reject(error);
+        })
+      })
+    },
+    signUpCompany({commit,state}){
+      var obj={
+        name: ''+state.company.name,
+        description: ''+state.company.desription,
+        type: state.company.type,
+        site: ''+state.company.site,
+        idNumber: ''+state.company.id,
+        password:''+state.company.password
+      }
+      return new Promise((reject,resolve)=>{
+        axios.
+        post('http://192.168.0.11:8000/signUpCompany/',obj)
+        .then(({data,status})=>{
+          resolve(true)
+        })
+        .catch(error=>{
+          reject(error)
+        })
+      })
+    },
+    postJob({commit,state},ele){
+      var obj={
+        company:''+state.company.id,
+        name:''+ele.title,
+        description:''+ele.description,
+        price: ele.price
+      }
+      return new Promise((resolve,reject)=>{
+        axios.post('http://192.168.0.11:8000/postJob/',obj)
+          .then(({data,status})=>{
+            if(status === 200){
+              console.log(data)
+              state.jobId = data[0]['pk']
+              console.log(state.jobId)
+              resolve(true);
+            }
+          })
+          .catch(error=>{
+            reject(error);
+        })
+      })
+    },
+    updateJob({commit,state},ele){
+      var obj={
+        id: ele.id,
+        name:''+ele.title,
+        description:''+ele.description,
+        price: ele.price
+      }
+      return new Promise((resolve,reject)=>{
+        axios.post('http://192.168.0.11:8000/updateJob/',obj)
+          .then(({data,status})=>{
+            if(status === 200){
+              console.log(data)
+              resolve(true);
+            }
+          })
+          .catch(error=>{
+            reject(error);
+        })
+      })
+    },
+    deleteJob({commit,state},id){
+      return new Promise((resolve,reject)=>{
+        axios.post('http://192.168.0.11:8000/deleteJob/'+id)
+          .then(({data,status})=>{
+            if(status === 200){
+              console.log(data)
+              resolve(true);
+            }
+          })
+          .catch(error=>{
+            reject(error);
+        })
+      })
+    },
+    getInfluencersForActiveJob({commit,state},id){
+      return new Promise((resolve,reject)=>{
+        axios.
+        get('http://192.168.0.11:8000/getInfluencersForActiveJob/'+id)
+        .then(({data,status})=>{
+          state.interestedInfluencers=[]
+          data.forEach(element => {
+            var obj=element['fields']
+            obj['id']=element['pk']
+            state.interestedInfluencers.push(obj)
+          });
+          resolve(true)
+        })
+        .catch(error=>{
+          reject(error)
+        })
+      })
+    },
+    finishJob({commit,state},ele){
+      // var obj={
+      //   id: ele.id,
+      //   influencer: ele.influencer
+      // }
+      return new Promise((resolve,reject)=>{
+        axios.post('http://192.168.0.11:8000/finishJob/',ele)
+          .then(({data,status})=>{
+            if(status === 200){
+              console.log(data)
               resolve(true);
             }
           })

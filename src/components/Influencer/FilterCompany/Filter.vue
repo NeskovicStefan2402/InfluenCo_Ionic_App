@@ -24,6 +24,7 @@ export default {
         }
     },
     created(){
+      this.$store.state.typeData=-1
         this.$store.dispatch('getCompanyTypes')
         // this.postSelected()
 

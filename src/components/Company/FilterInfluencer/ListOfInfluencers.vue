@@ -32,6 +32,7 @@
 <script>
 import InfluencerCard from './InfluencerCard'
 import FilterCard from './Filter'
+import eventBus from '../../../main'
 export default {
     components:{
         InfluencerCard,
@@ -65,8 +66,16 @@ export default {
         }
     },
     created(){
-        this.$store.dispatch('getInfluencers')      
+        this.$store.dispatch('getInfluencers') 
+        this.$store.state.typeData=-1
+             
     },
+    mounted(){
+        eventBus.$on('changeIterests',ele=>{
+            this.min=0
+            this.max=6
+        })
+    }
 }
 </script>
 <style scoped>

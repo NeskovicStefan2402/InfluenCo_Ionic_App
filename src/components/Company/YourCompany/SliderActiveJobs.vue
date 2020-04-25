@@ -1,30 +1,32 @@
 <template>
-    <div v-if='$store.state.jobs.filter(ele=>ele.company==company.id).length==0'>
-        <ion-card class="warning">
-            <ion-item>
-                <ion-label>This company don't have any job!</ion-label>
-            </ion-item>
-        </ion-card>
-    </div>
-    <div v-else>
+    <div>
         <ion-slides v-if='open' pager="true" :options="slideOpts">
             <ion-slide v-for="i in $store.state.jobs.filter(ele=>ele.company==company.id)">
-                <GalleryCard :company='i'/>
+                <JobCard :job='i'/>
+            </ion-slide>
+            <ion-slide v-if="!newJob">
+                <NewJob/>
+            </ion-slide>
+            <ion-slide v-else>
+                <EditJob/>
             </ion-slide>
         </ion-slides>
     </div> 
 </template>
 <script>
-import NewJob from '../../Company/YourCompany/NewJob'
-import GalleryCard from '../Gallery/GalleryCard'
+import JobCard from './JobCard'
+import NewJob from './NewJob'
+import EditJob from './EditJob'
+import eventBus from '../../../main'
 export default {
     props:[
         'company'
     ],
-  components:{
-    GalleryCard,
-    NewJob
-  },
+    components:{
+        JobCard,
+        NewJob,
+        EditJob
+    },
   created(){
     this.$store.dispatch('getActiveJobs')
                 .then(success=>{
@@ -37,13 +39,14 @@ export default {
                 // initSlide : 1,
                 speed : 400
             },
-            open:false
+            open:false,
+            newJob:false
         }
     },
-    computed:{
-        companyLoggedIn(){
-            return JSON.parse(localStorage.getItem('company'))!=null ? true : false
-        }
+    mounted(){
+        eventBus.$on('workWithJob',ele=>{
+            this.newJob=ele
+        })
     }
 }
 

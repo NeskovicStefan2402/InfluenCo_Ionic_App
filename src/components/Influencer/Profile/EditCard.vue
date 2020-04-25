@@ -6,7 +6,7 @@
         <ion-card-content>
                 <ion-item>
                     <ion-label position="stacked">Profile picture</ion-label>
-                    <ion-input type='file' :value='$store.state.influencer.image' @change="onFileSeleceted($event)"></ion-input>
+                    <ion-input type='file' :value='file_name' @change="onFileSeleceted($event)"></ion-input>
                 </ion-item>
                 <ion-item>
                     <ion-label position="stacked">First Name</ion-label>
@@ -55,36 +55,35 @@ export default {
             eventBus.$emit('apply')
         },
         apply(){
+            this.upload()
+        },
+        send_data(){
             this.$store.dispatch('updateInfluencer')
-            .then(success => {
-                alert('We successfully save your data!')
-            })
-            .catch(
-                error => {
-                    alert('Sorry! We have problem with saving data!')
-                }
-            )
-            this.cancel()
+                .then(success => {
+                    alert('We successfully save your data!')
+                })
+                .catch(
+                    error => {
+                        alert('Sorry! We have problem with saving data!')
+                    }
+                )
+                this.cancel()
         },
         onFileSeleceted($event){
-            // console.log($event)
             this.file_name=$event.target.files[0]
         },
         upload(){
             if(this.file_name==null){
                 alert('First upload file')
+                this.send_data()
             }else{
-                // console.log(this.file_name)
                 const fd=new FormData();
-                fd.append('image',this.file_name,this.file_name.name)
-                console.log(fd)
-                this.$store.dispatch('uploadImage',fd)
+                var name= this.$store.state.influencer.email.replace('.','')+'.jpg'
+                fd.append('image',this.file_name,name)
+                this.$store.dispatch('uploadInfluencerImage',fd)
                 .then(success=>{
-                    console.log('Success')
-                })
-                .catch(error=>{
-                    alert('Error')
-                })
+                        this.send_data()
+                    })
             }
         }
     }

@@ -41,15 +41,28 @@
 export default {
     data(){
         return{
-            open:false
+            open:false,
+            data_file:null
         }
     },
     methods:{
+        onFileSeleceted($event){
+            // console.log($event)
+            this.data_file=$event.target.files[0]
+            
+        },
         apply(){
-            this.$store.dispatch('updateCompany').
-            then(success=>{
-                alert('Successfully update your company profile!')
+            const fd=new FormData();
+            fd.append('image',this.data_file,this.data_file.name)   
+            
+            this.$store.dispatch('uploadCompanyLogo',fd)
+            .then(success=>{
+                this.$store.dispatch('updateCompany')
+                .then(success=>{
+                    alert('Successfully update your company profile!')
+                })
             })
+            
         }
     }
 }

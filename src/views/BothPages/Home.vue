@@ -1,6 +1,5 @@
 <template>
     <div class="ion-page">
-        
         <HomeContent/>
     </div>
 </template>

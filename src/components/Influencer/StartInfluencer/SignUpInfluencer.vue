@@ -13,21 +13,17 @@
             <ion-input placeholder="Age" type='number' :value="age" @ionInput="age = $event.target.value"></ion-input>
         </ion-item>
         <ion-item @click="openInterests()">
-            <ion-label >Interests: {{$store.state.interest.name}}</ion-label>
+                <ion-col size='11'>
+                    <ion-label >Interests: {{$store.state.interest.name}}</ion-label>
+                </ion-col>
+                <ion-col>
+                    <i class='fas fa-angle-right' style='font-size:18px'></i>
+                </ion-col>
         </ion-item>
-        <ion-item>
-            <ion-input placeholder="Youtube name" :value="youtube" @ionInput="youtube = $event.target.value"></ion-input>
-        </ion-item>
-        <ion-item>
-            <ion-input placeholder="Instagram name" :value="instagram" @ionInput="instagram = $event.target.value"></ion-input>
-        </ion-item>
-        <ion-item>
-            <ion-input placeholder="Facebook name" :value="facebook" @ionInput="facebook = $event.target.value"></ion-input>
-        </ion-item>
-        <ion-item>
-            <ion-input placeholder="Twitter name" :value="twitter" @ionInput="twitter = $event.target.value"></ion-input>
-        </ion-item>
-        
+        <Item :data='items[0]'/>
+        <Item :data='items[1]'/>
+        <Item :data='items[2]'/>
+        <Item :data='items[3]'/>
         <ion-item>
             <ion-input type='password' placeholder="Password" :value="password" @ionInput="password = $event.target.value"></ion-input>
         </ion-item>
@@ -46,13 +42,37 @@
 </template>
 <script>
 import Interests from './InfluencerInterests'
+import Item from './Item'
 import eventBus from '../../../main'
 export default {
     components:{
-        Interests
+        Interests,
+        Item
     },
     data(){
         return{
+                items:[
+                    {
+                        placeholder:'Youtube name',
+                        value:'youtube',
+                        question:'Do you have youtube channel?'
+                    },
+                    {
+                        placeholder:'Facebook name',
+                        value:'facebook',
+                        question:'Do you have facebook profile?'
+                    },
+                    {
+                        placeholder:'Instagram name',
+                        value:'instagram',
+                        question:'Do you have instagram profile?'
+                    },
+                    {
+                        placeholder:'Twitter name',
+                        value:'twitter',
+                        question:'Do you have twitter profile?'
+                    },
+                ],
                 first:'',
                 last:'',
                 email:'',
@@ -65,6 +85,27 @@ export default {
                 password:'',
                 confirm_password:''
         }
+    },
+    mounted(){
+        eventBus.$on('inputChange',ele=>{
+            switch(ele.name){
+                case 'youtube':
+                    this.youtube=ele.value
+                    break;
+                case 'facebook':
+                    this.facebook=ele.value
+                    break;
+                case 'twitter':
+                    this.twitter=ele.value
+                    break;
+                case 'instagram':
+                    this.instagram=ele.value
+                    break;
+                default:
+                    console.log('Nije poznato')
+                    break;
+            }
+        })
     },
     methods:{
         openInterests(){
@@ -106,6 +147,7 @@ export default {
                 facebook:this.facebook,
                 password:this.password
             }
+            // console.log(data)
             this.$store.dispatch('signUpInfluencer',data)
                 .then(success=>{
                     alert('Your account is successfully created!')

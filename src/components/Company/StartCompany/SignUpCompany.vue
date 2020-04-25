@@ -41,8 +41,15 @@ export default {
             this.$store.state.company.confirm_password=''
         },
         send(){
-            alert('Podaci su:{'+this.$store.state.company.name+','+this.$store.state.company.description+','+this.$store.state.company.id+','+this.$store.state.company.site+','+this.$store.state.company.password+','+this.$store.state.company.confirm_password+'}')
-            this.cancel()
+            this.$store.dispatch('signUpCompany')
+            .then(success=>{
+                alert('Successfully created company!')
+                this.cancel()
+            })
+            .catch(error=>{
+                alert('Error:'+error)
+            })
+            
         }
     }
 }

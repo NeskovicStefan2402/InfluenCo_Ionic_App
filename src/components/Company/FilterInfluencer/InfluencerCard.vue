@@ -13,7 +13,7 @@ export default {
     props:['influencer'],
     computed:{
         image() {
-            return "http://192.168.0.11:8000/" + this.influencer.image;
+            return "http://192.168.0.11:8000/uploads/" + this.influencer.image;
         },
         name(){
             return this.influencer.first_name

@@ -25,7 +25,7 @@
 export default {
     computed:{
         image(){
-            return 'http://192.168.0.11:8000/'+this.$store.state.company.logo
+            return 'http://192.168.0.11:8000/uploads/'+this.$store.state.company.logo
         },
         typeName(){
             var type=this.$store.state.types.filter(ele=>ele.id == this.$store.state.company.type)

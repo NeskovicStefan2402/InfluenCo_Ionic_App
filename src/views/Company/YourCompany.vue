@@ -6,11 +6,14 @@
             <div v-else>
             <InfoCard/>
             <EditData/>
-            <ion-item>
-                <h3>Your active jobs:</h3>
-            </ion-item>
-            <ActiveJobs :company='$store.state.company'/>
-            <HistoryCards/>
+            <Subheader/>
+            <div v-if="page=='active'">
+                <ion-item>
+                    <h3>Your active jobs:</h3>
+                </ion-item>
+                <ActiveJobs :company='$store.state.company'/>
+            </div>
+            <HistoryCards v-else/>
             </div>
         </ion-content>
     </ion-page>
@@ -20,7 +23,8 @@ import EditData from '../../components/Company/YourCompany/EditData'
 import InfoCard from '../../components/Company/YourCompany/InfoCompany'
 import HistoryCards from '../../components/Company/YourCompany/YourJobsHistory'
 import Menu from '../../components/Company/Menu/LeftMenu'
-import ActiveJobs from '../../components/Influencer/CompanyInfo/CompanyActiveJobs'
+import Subheader from '../../components/Company/YourCompany/Subheader'
+import ActiveJobs from '../../components/Company/YourCompany/SliderActiveJobs'
 import HeaderIn from '../../components/StartComponents/HeaderIn'
 import eventBus from '../../main'
 export default {
@@ -30,17 +34,22 @@ export default {
         Menu,
         HeaderIn,
         ActiveJobs,
-        EditData
+        EditData,
+        Subheader
     },
     data(){
         return{
-            open:false
+            open:false,
+            page:'active'
         }
     },
     mounted() {
         eventBus.$on("nav", ele => {
             this.open = ele;
         });
+        eventBus.$on('subheader_company',ele=>{
+            this.page=ele
+        })
     },
 }
 </script>
