@@ -18,7 +18,7 @@ export default {
 }
 </script>
 <style scoped>
-#jobs{
+div{
     background-color: rgb(206, 219, 220);
 }
 </style>

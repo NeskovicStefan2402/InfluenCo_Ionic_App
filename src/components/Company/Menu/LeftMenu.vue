@@ -29,7 +29,7 @@ export default {
       },
       messages:{
         name:'Message',
-        path:'/homeCompany'
+        path:'/chat'
       },
       companies:{
         name:'Companies',

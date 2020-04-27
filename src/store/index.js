@@ -26,6 +26,7 @@ export default new Vuex.Store({
     selectedInfluencer:null,
     interestedInfluencers:[],
     companies:[],
+    chats:[],
     influencers:[],
     filterData:'',
     typeData:-1,
@@ -41,6 +42,7 @@ export default new Vuex.Store({
         password:''
       }
     },
+    messages:[],
     history:[],
     types:[]
   },
@@ -513,15 +515,62 @@ export default new Vuex.Store({
       })
     },
     finishJob({commit,state},ele){
-      // var obj={
-      //   id: ele.id,
-      //   influencer: ele.influencer
-      // }
       return new Promise((resolve,reject)=>{
         axios.post('http://192.168.0.11:8000/finishJob/',ele)
           .then(({data,status})=>{
             if(status === 200){
               console.log(data)
+              resolve(true);
+            }
+          })
+          .catch(error=>{
+            reject(error);
+        })
+      })
+    },
+    getChats({commit,state}){
+      var type = JSON.parse(localStorage.getItem('influencer')) == null ? 'company' : 'influencer'
+      var id = type == 'company' ? state.company.id : state.influencer.id
+      return new Promise((resolve,reject)=>{
+        axios.
+        get('http://192.168.0.11:8000/chats/'+type+'/'+id)
+        .then(({data,status})=>{
+          state.chats=[]
+          data.forEach(element => {
+            state.chats.push(element)
+          });
+          resolve(true)
+        })
+        .catch(error=>{
+          reject(error)
+        })
+      })
+    },
+    getMessages({commit,state},id){
+      return new Promise((resolve,reject)=>{
+        axios.
+        get('http://192.168.0.11:8000/messages/'+id)
+        .then(({data,status})=>{
+          state.messages=[]
+          data.forEach(element => {
+            state.messages.push(element)
+          });
+          resolve(true)
+        })
+        .catch(error=>{
+          reject(error)
+        })
+      })
+    },
+    postMessage({commit,state},ele){
+      return new Promise((resolve,reject)=>{
+        axios.post('http://192.168.0.11:8000/postMessage/',ele)
+          .then(({data,status})=>{
+            if(status === 200){
+              state.messages=[]
+              data.forEach(element => {
+                state.messages.push(element)
+              });
               resolve(true);
             }
           })

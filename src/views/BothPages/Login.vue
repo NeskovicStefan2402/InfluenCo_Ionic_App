@@ -1,6 +1,8 @@
 <template>
-    <LoginInfluencer v-if="$store.state.type=='influencer'"/>
-    <LoginCompany v-else/>
+    <ion-page>
+        <LoginInfluencer v-if="$store.state.type=='influencer'"/>
+        <LoginCompany v-else/>
+    </ion-page>
 </template>
 <script>
 import LoginInfluencer from '../../components/Influencer/StartInfluencer/LoginInfluencer'
@@ -12,3 +14,5 @@ export default {
     }
 }
 </script>
+<style scoped>
+</style>

@@ -31,7 +31,7 @@ export default {
       },
       messages:{
         name:'Message',
-        path:'/home'
+        path:'/chat'
       },
       companies:{
         name:'Companies',

@@ -5,6 +5,7 @@
     </ion-app>
     <router-view></router-view>
     <router-view name='header-welcome'></router-view>
+    <router-view name='header-chat'></router-view>
   </div>
 </template>
 <style scoped>

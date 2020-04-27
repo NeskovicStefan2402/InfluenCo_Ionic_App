@@ -19,6 +19,11 @@ export default{
 }
 </script>
 <style scoped>
+ion-page{
+    background-image: url('../../assets/back.jpg');
+    height: 100vh;
+    width: 100%;
+}
 .ion-padding{
     padding: 100px;
 }

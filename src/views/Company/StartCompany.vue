@@ -47,4 +47,9 @@ h3{
 .naslov{
     text-align: center;
 }
+div{
+    background-image: url('../../assets/back.jpg');
+    height: 100vh;
+    width: 100%;
+}
 </style>

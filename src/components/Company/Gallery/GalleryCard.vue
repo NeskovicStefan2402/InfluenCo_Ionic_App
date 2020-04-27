@@ -42,7 +42,9 @@ export default {
 }
 </script>
 <style scoped>
-
+ion-card{
+    background-color: white;
+}
 .slika{
     height: 100px;
     width: 150px;

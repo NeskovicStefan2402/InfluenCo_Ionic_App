@@ -48,6 +48,6 @@ export default {
 </script>
 <style scoped>
 ion-page{
-    background-color: rgb(208, 213, 213);
+    background-color: rgb(19, 49, 49);
 }
 </style>

@@ -14,6 +14,10 @@ import InfluencerProfile from '../views/Influencer/InfluencerProfile.vue'
 import Interests from '../components/Influencer/StartInfluencer/InfluencerInterests'
 import WelcomeHeader from '../components/StartComponents/WelcomeHeader'
 import Welcome from '../views/BothPages/Welcome.vue'
+import ChatHome from '../views/BothPages/Chat/ChatHome'
+import Chat from '../views/BothPages/Chat/Chat'
+import NewChat from '../views/BothPages/Chat/NewChat'
+import ChatHeader from '../components/Chat/HeaderChat'
 import CompanyInfo from '../views/Influencer/CompanyInfoPage'
 import { IonicVueRouter } from "@ionic/vue";
 Vue.use(IonicVueRouter);
@@ -30,6 +34,11 @@ Vue.use(IonicVueRouter);
     component: Companies
   },
   {
+    path: '/newChat',
+    name: 'NewChat',
+    component: NewChat
+  },
+  {
     path:'/companies/:id',
     name:'companyInfo',
     component: CompanyInfo
@@ -43,6 +52,19 @@ Vue.use(IonicVueRouter);
     path: '/interests',
     name: 'Interests',
     component: Interests
+  },
+  {
+    path: '/chat',
+    name: 'Chats',
+    components:{  
+      'header-chat':ChatHeader,
+      default:ChatHome
+    }
+
+  },
+  {
+    path:'/inbox/:id',
+    component:Chat
   },
   {
     path: '/yourCompany',

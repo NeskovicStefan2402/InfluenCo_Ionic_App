@@ -8,7 +8,7 @@
                     <h3>Top 5 paid advertisements:</h3>
                 </ion-item>
                 <Gallery />
-                <JobsPart/>
+                <JobsPart class="jobs"/>
                 <!-- Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro culpa dignissimos sed nobis labore ex maxime esse, eaque veniam deleniti amet impedit quam temporibus. Magnam in molestias necessitatibus iste, id corporis, saepe nostrum libero perspiciatis, fugit aut quibusdam beatae est aliquid placeat laboriosam iure atque! Sequi saepe ut amet accusantium. -->
             </div>
         </ion-content>
@@ -45,5 +45,13 @@ h3{
 }
 .naslov{
     text-align: center;
+}
+div{
+    background-image: url('../../assets/back.jpg');
+    height: 100vh;
+    width: 100%;
+}
+.jobs{
+    background-color: rgb(206, 219, 220);
 }
 </style>
