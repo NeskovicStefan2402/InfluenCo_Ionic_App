@@ -43,9 +43,7 @@ export default {
                 image : this.image,
                 name: this.name
             }
-            // JSON.parse(localStorage.getItem('influencer'))==null ? this.$store.state.company.id : 
             chat['id']=this.user.id 
-            // chat['id_influencer']=JSON.parse(localStorage.getItem('influencer'))!=null ? chat['id_influencer']= this.$store.state.influencer.id : chat['id_influencer']= this.user.id 
             this.$store.state.chats.push(chat)
             this.$store.state.messages=[]
             this.$router.push('/inbox/'+chat.id_chat)

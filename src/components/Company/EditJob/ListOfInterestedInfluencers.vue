@@ -20,6 +20,20 @@ export default {
         this.$store.dispatch('getInfluencersForActiveJob',this.job.id)
     },
     methods:{
+        sendMessage(){
+            var inf = this.$store.state.selectedInfluencer
+            var msg = {
+                id_influencer: inf.id,
+                id_chats:-1,
+                id_company: this.$store.state.company.id,
+                send : 'company',
+                text : 'Dear '+ inf.first_name+', Congratulations on your new job! In our job description you could see more information about this job. With skills like yours, you don’t need luck — but good luck in your new job, anyway. Bye!'
+            }
+            this.$store.dispatch('postMessage',msg)
+            .then(success=>{
+                this.$router.push('/yourCompany')
+            })
+        },
         finish(){
             if(this.$store.state.selectedInfluencer==null){
                 alert('First must to select influencer!')
@@ -31,7 +45,7 @@ export default {
                     }
                     this.$store.dispatch('finishJob',obj)
                     .then(success=>{
-                        this.$router.push('/yourCompany')
+                        this.sendMessage()
                     })
                 }
             }

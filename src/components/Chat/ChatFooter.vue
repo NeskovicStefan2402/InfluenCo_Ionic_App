@@ -33,8 +33,9 @@ export default {
                 id_influencer: sendWho == 'influencer' ? this.$store.state.influencer.id : this.chat.id,
                 text: ''+this.message
             }
-            console.log(obj)
-            this.$store.dispatch('postMessage',obj)
+            if(this.message!=''){
+                this.$store.dispatch('postMessage',obj)
+            }
             this.message = ''
             eventBus.$emit('scroll');
         }
