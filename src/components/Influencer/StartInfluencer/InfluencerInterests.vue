@@ -13,7 +13,7 @@
             
         </ion-toolbar>
     </ion-header>
-    <ion-content>
+    <ion-content class="telo">
         <ion-item v-for="i,index in $store.state.interests" @click="selectItem(i)">
             <ion-col>
                 {{i.name}}
@@ -39,4 +39,9 @@ export default {
 
 </script>
 <style scoped>
+.telo{
+    border-color: #f2b620;
+	background-color: #f2b620;
+	color: black; 
+}
 </style>

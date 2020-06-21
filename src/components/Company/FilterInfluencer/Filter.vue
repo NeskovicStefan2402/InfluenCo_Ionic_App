@@ -40,9 +40,12 @@ export default {
 select{
     width: 100%;
     height: 90%;
-    border-radius: 10px;
+    border-radius: 5px;
     border: none;
-    color: rgb(255, 255, 255);
-    background-color: #3880ff;
+    color: white;
+    background-color: #2734476d;
+}
+option{
+  color: white;
 }
 </style>

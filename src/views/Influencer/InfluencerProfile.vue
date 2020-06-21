@@ -6,9 +6,11 @@
         <ion-content>
             <Menu v-if='$store.state.open_menu==true'/>
             <div v-else>
-                <Info/>
-                <Icons/>
-                <EditPart/>
+                <div class="headinf">
+                    <Info/>   
+                    <Icons/>
+                    <EditPart/>     
+                </div>
                 <Subheader/>
                 <Stats v-if="open=='stats'"/>
                 <div v-else>
@@ -56,3 +58,9 @@ export default {
     }
 }
 </script>
+<style scoped>
+.headinf{
+    background-image: url('../../assets/back.jpg');
+  
+}
+</style>

@@ -20,7 +20,7 @@ export default{
 </script>
 <style scoped>
 ion-page{
-    background-image: url('../../assets/back.jpg');
+    background-color: #f2b620;
     height: 100vh;
     width: 100%;
 }

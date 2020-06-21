@@ -13,7 +13,7 @@ export default {
     props:['influencer'],
     computed:{
         image() {
-            return "http://192.168.0.11:8000/uploads/" + this.influencer.image;
+            return "http://10.1.2.197:8000/uploads/" + this.influencer.image;
         },
         name(){
             return this.influencer.first_name
@@ -21,7 +21,7 @@ export default {
     },
     methods:{
         openProfile(){
-            this.$router.push('influencers/'+this.influencer.id)
+            // this.$router.push('influencers/'+this.influencer.id)
         }
     }
 }
@@ -35,7 +35,7 @@ img{
     text-align: center;
 }
 ion-card{
-    background-color: rgb(149, 150, 153);
+    background-color: #273447;
     color: white;
 }
 </style>

@@ -1,8 +1,5 @@
 <template>
     <div id='jobs'>
-                <ion-item>
-                    <h3>Search for jobs!</h3>
-                </ion-item>
         <FilterJob/>
         <Jobs/>
     </div>
@@ -19,6 +16,9 @@ export default {
 </script>
 <style scoped>
 div{
-    background-color: rgb(206, 219, 220);
+    background-color: #f2b620;
+}
+ion-item{
+    background-color: #f2b620;
 }
 </style>

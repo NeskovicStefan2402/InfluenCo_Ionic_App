@@ -1,17 +1,18 @@
 <template>
-    <ion-content class="ion-padding">
-        <ion-card>
-            <ion-card-content class="polje">
+    <ion-content >
+        <div class="polje">
                 <h1>Who are you?</h1>
-            </ion-card-content>
-        </ion-card>
+                <br>
+                <p>InfluenCo is a application for connecting young Influencers and Company for investing in them.</p>
+                <p><i>Select your choice and start with us!</i></p>
+        </div>
         <ion-grid>
-            <ion-row>
+            <ion-row align='center'>
                 <ion-col>
-                    <ion-button @click="openInfluencer()" color='primary'>Influencer</ion-button>
+                    <button @click="openInfluencer()" class="dugme">Influencer</button>
                 </ion-col>
                 <ion-col>
-                    <ion-button @click="openCompany()" color='danger'>Company</ion-button>
+                    <button @click="openCompany()" class="dugme">Company</button>
                 </ion-col>
             </ion-row>
         </ion-grid>
@@ -32,14 +33,29 @@ export default {
 }
 </script>
 <style scoped>
+.dugme{
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    font-size: 15px;
+    font-weight: bold;
+    color: #273447;
+    border: 2px solid #273447;
+    box-shadow: 3px 3px 28px #273447;
+    background-color: transparent;
+}
 .polje{
-    background-color: rgb(72, 25, 117);
-    padding-top: 100px;
-    padding-bottom: 100px;
+    background-color: #273447;
+    padding-top: 50px;
+    padding-bottom: 50px;
     text-align: center;
     color: white;
+    width: 100%;
 }
 ion-grid{
-    margin-top: 100px;
+    padding-top: 100px;
+    background-color: #f2b620;
+    height: 100%;
+    width: 100%;
 }
 </style>

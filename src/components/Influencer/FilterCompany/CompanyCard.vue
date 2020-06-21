@@ -17,7 +17,7 @@
             <ion-row>
                 <ion-col size='9'></ion-col>
                 <ion-col size='3'>
-                    <ion-button @click="companyInfo">...</ion-button>
+                    <ion-button @click="companyInfo" color='secondary'> > </ion-button>
                 </ion-col>
             </ion-row>
         </ion-card-footer>
@@ -28,7 +28,7 @@ export default {
     props:['company'],
     computed:{
         image() {
-            return "http://192.168.0.11:8000/uploads/" + this.company.logo;
+            return "http://10.1.2.197:8000/uploads/" + this.company.logo;
         }
     },
     methods:{
@@ -39,8 +39,16 @@ export default {
 }
 </script>
 <style scoped>
+ion-card{
+    background-color: rgba(253, 250, 149, 0.374);
+    color: black;
+}
+h4{
+    color: black;
+}
 img{
     height: 40px;
     width: 80px;
 }
+
 </style>

@@ -1,5 +1,7 @@
 <template>
-  <ion-row class="filt">
+  <div class="filt">
+  <h3>Search for jobs!</h3>
+  <ion-row>
     <ion-col >
       <ion-searchbar
         show-cancel-button="never"
@@ -9,9 +11,14 @@
       ></ion-searchbar>
     </ion-col>
   </ion-row>
+  
+  </div>
 </template>
 <style scoped>
 .filt{
-    background-color: rgb(206, 219, 220);
+    background-color: #f2b620;
+}
+h3{
+  padding: 10px;
 }
 </style>

@@ -24,7 +24,7 @@ export default{
     props:['company'],
     computed:{
         image() {
-            return "http://192.168.0.11:8000/uploads/" + this.company.logo;
+            return "http://10.1.2.197:8000/uploads/" + this.company.logo;
         },
         type(){
             var t=''

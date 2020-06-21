@@ -25,6 +25,7 @@ export default {
     },
     created(){
       this.$store.state.typeData=-1
+      this.$store.state.filterData=''
         this.$store.dispatch('getCompanyTypes')
         // this.postSelected()
 
@@ -33,7 +34,7 @@ export default {
         
         onChange(event){
             this.$store.state.typeData = event.target.value
-            console.log(this.type)
+            
         }
     }
 }

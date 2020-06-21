@@ -1,9 +1,12 @@
 <template>
     <div>
         <ion-slides v-if='open' pager="true" :options="slideOpts">
-            <ion-slide v-for="i in $store.state.jobs.filter(ele=>ele.company==company.id)">
+            <ion-slide v-for="i in $store.state.jobs.filter(ele=>ele.company==company.id)" v-if='$store.state.compLoad==false'>
                 <JobCard :job='i'/>
             </ion-slide>
+            <div v-else>
+                <CompLoader/>
+            </div>
             <ion-slide v-if="!newJob">
                 <NewJob/>
             </ion-slide>
@@ -17,6 +20,7 @@
 import JobCard from './JobCard'
 import NewJob from './NewJob'
 import EditJob from './EditJob'
+import CompLoader from '../../StartComponents/ComponentLoad'
 import eventBus from '../../../main'
 export default {
     props:[
@@ -25,7 +29,8 @@ export default {
     components:{
         JobCard,
         NewJob,
-        EditJob
+        EditJob,
+        CompLoader
     },
   created(){
     this.$store.dispatch('getActiveJobs')

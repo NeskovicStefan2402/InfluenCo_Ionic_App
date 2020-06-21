@@ -50,9 +50,10 @@ export default {
                     }
     },  
     created(){
-         this.$store.dispatch('getYoutubeStats')
+        if(this.$store.state.youtube.videos!=0){
+            this.$store.dispatch('getYoutubeStats')
                 .then(success=>{
-                    console.log('Success')
+                    
                 })
                 .catch(error=>{
                     this.$store.state.youtube={
@@ -61,6 +62,7 @@ export default {
                         videos:0
                     }
                 })
+        }
     }
 }
 </script>

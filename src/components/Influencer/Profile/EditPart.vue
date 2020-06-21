@@ -24,3 +24,8 @@ export default {
     }
 }
 </script>
+<style scoped>
+ion-button{
+    margin:10px;
+}
+</style>

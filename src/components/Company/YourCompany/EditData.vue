@@ -18,7 +18,7 @@
                 </ion-item>
                 <ion-item>
                     <ion-label position="stacked">Description</ion-label>
-                    <ion-textarea :value='$store.state.company.desription' @input="$store.state.company.description= $event.target.value"></ion-textarea>
+                    <ion-textarea :value='$store.state.company.desription' @ionInput="$store.state.company.desription= $event.target.value"></ion-textarea>
                 </ion-item>
         </ion-card-content>
 
@@ -47,21 +47,29 @@ export default {
     },
     methods:{
         onFileSeleceted($event){
-            // console.log($event)
+            
             this.data_file=$event.target.files[0]
             
         },
         apply(){
-            const fd=new FormData();
-            fd.append('image',this.data_file,this.data_file.name)   
-            
-            this.$store.dispatch('uploadCompanyLogo',fd)
-            .then(success=>{
+            if(this.data_file==null){
                 this.$store.dispatch('updateCompany')
                 .then(success=>{
                     alert('Successfully update your company profile!')
+                    this.open=false;
                 })
-            })
+            }else{ 
+                const fd=new FormData();
+                fd.append('image',this.data_file,this.data_file.name)  
+                this.$store.dispatch('uploadCompanyLogo',fd)
+                .then(success=>{
+                    this.$store.dispatch('updateCompany')
+                    .then(success=>{
+                        this.open=false;
+                        alert('Successfully update your company profile!')
+                    })
+                })
+            }
             
         }
     }

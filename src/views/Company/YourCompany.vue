@@ -4,8 +4,10 @@
         <ion-content  id='nesto'>
                 <Menu v-if='$store.state.open_menu==true'/>
             <div v-else>
-            <InfoCard/>
-            <EditData/>
+            <div class='headcomp'>
+                <InfoCard/>
+                <EditData/>
+            </div>
             <Subheader/>
             <div v-if="page=='active'">
                 <ion-item>
@@ -53,3 +55,8 @@ export default {
     },
 }
 </script>
+<style scoped>
+.headcomp{
+    background-image: url('../../assets/back.jpg');
+}
+</style>

@@ -14,7 +14,7 @@
 export default {
     computed:{
         image(){
-            return 'http://192.168.0.11:8000/uploads/'+this.$store.state.company.logo
+            return 'http://10.1.2.197:8000/uploads/'+this.$store.state.company.logo
         }
     }
 }
@@ -26,7 +26,11 @@ img{
     /* margin-left: 30%; */
 }
 ion-card{
+    background-color: rgb(152, 175, 199);
     color: white;
+    width: 100%;
+    margin: 0;
+    padding: 10px;
     text-align: center;
 }
 </style>

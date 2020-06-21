@@ -1,18 +1,18 @@
 <template>
     <ion-page>
+        <div class='strana'>
         <HeaderIn/>
-        <ion-content  id='nesto'>
+        <ion-content  id='nesto' >
                 <Menu v-if='$store.state.open_menu==true'/>
             <div v-else>
                 <ion-item class="ion-text-center">
-                    <h3>Top 5 popular inluencers:</h3>
+                    <h3>Top 5 popular influencers:</h3>
                 </ion-item>
                 <Gallery />
                 <InfluencersPart/>
-                <!-- <JobsPart/> --> 
-                <!-- Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro culpa dignissimos sed nobis labore ex maxime esse, eaque veniam deleniti amet impedit quam temporibus. Magnam in molestias necessitatibus iste, id corporis, saepe nostrum libero perspiciatis, fugit aut quibusdam beatae est aliquid placeat laboriosam iure atque! Sequi saepe ut amet accusantium. -->
             </div>
         </ion-content>
+        </div>
     </ion-page>
 </template>
 <script>
@@ -47,9 +47,15 @@ h3{
 .naslov{
     text-align: center;
 }
+.strana{
+    height:100%;
+    background-color: #1a222e;
+}
 div{
-    background-image: url('../../assets/back.jpg');
-    height: 100vh;
+    /* background-color: #f2b620; */
+    background-color: #1a222e;
+
+    height: 100%;
     width: 100%;
 }
 </style>

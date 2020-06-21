@@ -18,7 +18,7 @@ export default {
     props:['user'],
     computed:{
         image(){
-            return JSON.parse(localStorage.getItem('influencer'))==null ? 'http://192.168.0.11:8000/uploads/'+this.user.image : 'http://192.168.0.11:8000/uploads/'+this.user.logo
+            return JSON.parse(localStorage.getItem('influencer'))==null ? 'http://10.1.2.197:8000/uploads/'+this.user.image : 'http://10.1.2.197:8000/uploads/'+this.user.logo
         },
         name(){
             return JSON.parse(localStorage.getItem('influencer'))==null ? this.user.first_name+' '+this.user.last_name : this.user.name
@@ -33,9 +33,7 @@ export default {
             return ele
         }
     },
-    created(){
-        console.log(this.user)
-    },
+    
     methods:{
         openChat(){
             var chat={

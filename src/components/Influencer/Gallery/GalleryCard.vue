@@ -28,7 +28,7 @@ export default {
     ],
     computed: {
         image() {
-            return "http://192.168.0.11:8000/uploads/" + this.company.image;
+            return "http://10.1.2.197:8000/uploads/" + this.company.image;
         },
         postojiInfluencer(){
             return JSON.parse(localStorage.getItem('influencer'))!=null
@@ -60,7 +60,12 @@ export default {
 </script>
 <style scoped>
 ion-card{
-    background-color: white;
+    background-color: rgba(0, 0, 0, 0.891);
+    color: white;
+    border-radius: 30px;
+}
+h3{
+    color: white;
 }
 .slika{
     height: 200px;

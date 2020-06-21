@@ -1,5 +1,5 @@
 <template>
-    <div v-if="result.length>0" >
+    <div v-if="result.length>0" class="telo">
             <div v-if="$store.state.typeData==-1">
                 <CompanyCard  v-for="i in result.slice(min,max)" :company='i'/>
             </div>
@@ -40,9 +40,7 @@ export default {
         filterObjects(){
             var lista=[]
             lista=this.$store.state.companies.filter(ele=> ele.type == this.$store.state.typeData )
-            console.log(lista)
             lista=lista.filter(ele=> ele.name.toLowerCase().includes(this.$store.state.filterData.toLowerCase()))
-            console.log(lista)
             return lista
         },
         result(){
@@ -60,7 +58,7 @@ export default {
         }
     },
     created(){
-        console.log(this.$store.state.companies)
+        
         this.$store.dispatch('getCompanies')        
     },
 }

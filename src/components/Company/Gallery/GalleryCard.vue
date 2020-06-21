@@ -33,7 +33,7 @@ export default {
     ,
     computed: {
         image() {
-            return "http://192.168.0.11:8000/uploads/" + this.influencer.fields.image;
+            return "http://10.1.2.197:8000/uploads/" + this.influencer.fields.image;
         },
     },
     methods:{
@@ -42,11 +42,17 @@ export default {
 }
 </script>
 <style scoped>
+h3{
+    color: white;
+}
 ion-card{
-    background-color: white;
+    background-color: #f2b6200a;
+    border-radius: 10px;
+    width: 80%;
+    color: white;
 }
 .slika{
-    height: 100px;
-    width: 150px;
+    height: 130px;
+    width: 250px;
 }
 </style>

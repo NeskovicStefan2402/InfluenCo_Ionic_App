@@ -3,7 +3,7 @@
         <HeaderIn/>
         <ion-content  id='nesto'>
                 <Menu v-if='$store.state.open_menu==true'/>
-            <div v-else>
+            <div v-else class="slajdovi">
                 <ion-item class="ion-text-center">
                     <h3>Top 5 paid advertisements:</h3>
                 </ion-item>
@@ -40,6 +40,9 @@ export default {
 }
 </script>
 <style scoped>
+.slajdovi{
+    background-color: #f2b620;
+}
 h3{
     text-align: center;
 }
@@ -47,11 +50,11 @@ h3{
     text-align: center;
 }
 div{
-    background-image: url('../../assets/back.jpg');
+    /* background-image: url('../../assets/back.jpg'); */
     height: 100vh;
     width: 100%;
 }
 .jobs{
-    background-color: rgb(206, 219, 220);
+    background-color: #f2b620;
 }
 </style>

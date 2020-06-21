@@ -1,12 +1,14 @@
 <template>
-    <ion-content>
-        <ion-item>
-            <ion-input placeholder="Name" :value="company.name" @input="company.name = $event.target.value"></ion-input>
-        </ion-item>
-        <ion-item>
-            <ion-input type='password' placeholder="Password" :value="company.password" @input="company.password = $event.target.value"></ion-input>
-        </ion-item>
-        <ion-row>
+    <div class="login">
+        <div class='ion-item'>
+                <ion-input placeholder="Name" :value="company.name" @input="company.name = $event.target.value" class="polje"></ion-input>
+        </div>
+        <div class='ion-item'>
+                <ion-input type='password' placeholder="Password" :value="company.password" @input="company.password = $event.target.value" class="polje"></ion-input>
+            
+        </div>
+        <br>
+        <ion-row align='center'>
             <ion-col>
                 <ion-button color='danger' @click="reset()"> Reset</ion-button>
             </ion-col>
@@ -14,7 +16,7 @@
                 <ion-button color='success' @click="login()"> Login</ion-button>
             </ion-col>
         </ion-row>
-    </ion-content>
+    </div>
 </template>
 <script>
 export default {
@@ -30,11 +32,10 @@ export default {
         login(){
             this.$store.dispatch('loginCompany',this.company)
             .then(success=>{
-                console.log('Uspesno logovanje!')
                 this.$router.push('/info')
             })
             .catch(error=>{
-                console.log(error)
+                alert('Incorrect login!');
             })
         },
         reset(){
@@ -44,3 +45,15 @@ export default {
     }
 }
 </script>
+<style scoped>
+ion-content{
+    background-color: #f2b620;
+}
+
+.polje{
+    background-color: #f2b620;
+}
+div{
+    background-color: #f2b620;
+}
+</style>

@@ -56,6 +56,7 @@ export default {
 };
 </script>
 <style scoped>
+
 .sidenav {
   height: 100%;
   width: 300px;
@@ -82,6 +83,7 @@ export default {
 
 .sidenav label:hover {
   color: #f1f1f1;
+  
 }
 
 .sidenav .closebtn {
@@ -90,6 +92,7 @@ export default {
   right: 25px;
   font-size: 36px;
   margin-left: 50px;
+  
 }
 
 @media screen and (max-height: 450px) {
@@ -98,6 +101,7 @@ export default {
   }
   .sidenav label {
     font-size: 18px;
+    
   }
 }
 </style>

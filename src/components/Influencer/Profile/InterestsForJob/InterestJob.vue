@@ -21,14 +21,15 @@ export default {
     ],
     computed:{
         image(){
-            return "http://192.168.0.11:8000/uploads/" + this.interest.image;
+            return "http://10.1.2.197:8000/uploads/" + this.interest.image;
         }
     }
 }
 </script>
 <style scoped>
 .part{
-    background-color: white;
+    background-color: rgb(88, 88, 88);
+    color: white;
 }
 img{
     height: 40px;

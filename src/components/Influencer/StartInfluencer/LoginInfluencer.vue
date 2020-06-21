@@ -1,12 +1,13 @@
 <template>
-    <ion-content>
-        <ion-item>
-            <ion-input placeholder="Email" :value="email" @ionInput="email = $event.target.value"></ion-input>
-        </ion-item>
-        <ion-item>
-            <ion-input type='password' placeholder="Password" :value="password" @ionInput="password = $event.target.value"></ion-input>
-        </ion-item>
-        <ion-row>
+    <div class="login">
+        <div class='ion-item'>
+            <ion-input class="item item-input" placeholder="Email" :value="email" @ionInput="email = $event.target.value"></ion-input>
+        </div>
+        <div class='ion-item'>
+            <ion-input class="item item-input" type='password' placeholder="Password" :value="password" @ionInput="password = $event.target.value"></ion-input>
+        </div>
+        <br>
+        <ion-row align='center'>
             <ion-col>
                 <ion-button color='danger' @click="reset()"> Reset</ion-button>
             </ion-col>
@@ -14,7 +15,7 @@
                 <ion-button color='success' @click="login()"> Login</ion-button>
             </ion-col>
         </ion-row>
-    </ion-content>
+    </div>
 </template>
 <script>
 export default {
@@ -36,7 +37,7 @@ export default {
                     this.$router.push('/info')
                 })
                 .catch(error=>{
-                    alert('Error')
+                    alert('Incorrect login!')
                 })
         },
         reset(){
@@ -46,3 +47,21 @@ export default {
     }
 }
 </script>
+<style scoped>
+.login{
+    background-color: #f2b620;
+    width: 100%;
+    height: 100vh;
+}
+.item.item-trns {
+	border-color: #f2b620;
+	background-color: #f2b620;
+	color: black; 
+}
+.item.item-input {
+	border-color: #f2b620;
+	background-color: #f2b620;
+	color: black; 
+}
+
+</style>

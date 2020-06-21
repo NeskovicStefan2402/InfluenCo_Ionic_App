@@ -24,7 +24,7 @@ export default {
     },
     mounted(){
         eventBus.$on('scroll',ele=>{
-            console.log('Scroll...')
+            ('Scroll...')
             // this.getLast()
         })
     },

@@ -20,7 +20,7 @@ export default {
     props:['influencer'],
     computed:{
         image(){
-            return 'http://192.168.0.11:8000/uploads/'+this.influencer.image
+            return 'http://10.1.2.197:8000/uploads/'+this.influencer.image
         },
         isSelectedInfluencer(){
             return this.influencer == this.$store.state.selectedInfluencer ? true :false

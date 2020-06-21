@@ -40,7 +40,7 @@ export default {
     },
     computed:{
         image() {
-            return "http://192.168.0.11:8000/uploads/" + this.job.image;
+            return "http://10.1.2.197:8000/uploads/" + this.job.image;
         },
         postoji(){
             var odg=false

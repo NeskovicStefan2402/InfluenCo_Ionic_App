@@ -7,14 +7,14 @@
             </ion-col>
             <ion-col size='4'></ion-col>
         </ion-row>
-                <p>{{$store.state.influencer.first_name}} {{$store.state.influencer.last_name}}</p>
+                <h4>{{$store.state.influencer.first_name}} {{$store.state.influencer.last_name}}</h4>
     </ion-card>
 </template>
 <script>
 export default {
     computed:{
         image(){
-            return 'http://192.168.0.11:8000/uploads/'+this.$store.state.influencer.image
+            return 'http://10.1.2.197:8000/uploads/'+this.$store.state.influencer.image
         }
     }
 }
@@ -25,8 +25,15 @@ img{
     width: 70px;
     /* margin-left: 30%; */
 }
-ion-card{
+h4{
     color: white;
+}
+ion-card{
+    background-color: rgb(152, 175, 199);
+    color: white;
+    width: 100%;
+    margin: 0;
+    padding: 10px;
     text-align: center;
 }
 .image_class{

@@ -8,6 +8,7 @@
     <router-view name='header-chat'></router-view>
   </div>
 </template>
+
 <style scoped>
 
 </style>

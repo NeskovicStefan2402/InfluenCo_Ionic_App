@@ -25,17 +25,19 @@
 export default {
     computed:{
         image(){
-            return 'http://192.168.0.11:8000/uploads/'+this.$store.state.company.logo
+            return 'http://10.1.2.197:8000/uploads/'+this.$store.state.company.logo
         },
         typeName(){
             var type=this.$store.state.types.filter(ele=>ele.id == this.$store.state.company.type)
-            console.log(type)
             return type.name
         }
     }
 }
 </script>
 <style scoped>
+ion-card{
+    background-color: rgba(255, 255, 255, 0.68);
+}
 img{
     height: 90px;
     width: 100%;

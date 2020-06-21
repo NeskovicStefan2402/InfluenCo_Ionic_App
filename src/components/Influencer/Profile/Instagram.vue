@@ -51,13 +51,13 @@ export default {
         this.$store.state.instagram={
                         followers:0,
                         following:0,
-                        desccription:''
+                        description:''
                     }
     },  
     created(){
          this.$store.dispatch('getInstagramStats')
                 .then(success=>{
-                    console.log('Success')
+                    
                 })
                 .catch(error=>{
                     this.$store.state.instagram={

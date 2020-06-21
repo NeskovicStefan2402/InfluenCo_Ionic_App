@@ -29,7 +29,7 @@
 export default {
   computed: {
     image() {
-      return "http://192.168.0.11:8000/uploads/" + this.$store.state.influencer.image;
+      return "http://10.1.2.197:8000/uploads/" + this.$store.state.influencer.image;
     },
     
     interest_name() {
@@ -60,6 +60,7 @@ export default {
 <style scoped>
 .naslov {
   padding-top: 30px;
+  padding: 20px;
 }
 .defaultText {
   font-size: 10px;

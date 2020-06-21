@@ -1,13 +1,13 @@
 <template>
     <ion-row>
-        <ion-col size='9'>
-            <ion-item v-if='have'>
+        <ion-col size='9' >
+            <div v-if='have' >
                 <ion-label position="stacked">{{data.placeholder}}</ion-label>
                 <ion-input :placeholder="data.value" :value='val' @ionInput='input_data($event)'></ion-input>
-            </ion-item>
-            <ion-item v-else>
+            </div>
+            <div v-else justify='center'>
                 {{data.question}}
-            </ion-item>
+            </div>
         </ion-col>
         <ion-col size='3'>
             <ion-toggle color='primary' @ionChange="allowed($event)" ></ion-toggle>
